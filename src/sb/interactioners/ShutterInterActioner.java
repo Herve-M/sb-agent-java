@@ -4,6 +4,10 @@ import sb.actioners.IActioner;
 
 public class ShutterInterActioner implements IInterActioner, IActioner {
 
+	public ShutterInterActioner(String shutterName) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

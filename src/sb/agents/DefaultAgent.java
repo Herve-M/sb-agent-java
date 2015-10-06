@@ -15,10 +15,11 @@ import sb.helpers.ClassificationHelper;
 public class DefaultAgent extends Agent {
 	public List<AID> 	receivers;
 	private String strAgrs[] = new String[20];
+	public String targetedObject;
 	
 	@Override
 	protected void setup() {
-		System.out.println("Agent INIT : "+getAID().getName());
+		System.out.println("Agent INIT : " + getAID().getName());
 		
 		Object args[] = getArguments();
 		if(args != null && args.length > 0){
@@ -47,6 +48,7 @@ public class DefaultAgent extends Agent {
 	    
 	    //Behavior
 	    //addBehaviour(AgentDiscoveryBehaviour(this, ));
+		//addBehaviour(LightEquipment(this, false));
 		
 		//doDelete();
 	}	

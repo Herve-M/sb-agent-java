@@ -4,6 +4,10 @@ import sb.actioners.IActioner;
 
 public class HeatingInterActioner implements IActioner, IInterActioner {
 
+	public HeatingInterActioner(String heatingName) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
