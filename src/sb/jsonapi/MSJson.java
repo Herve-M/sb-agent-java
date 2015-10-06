@@ -63,7 +63,6 @@ public class MSJson {
 	
 	public static boolean updateEquipement(String Name, boolean bool, String value){
 		String url = _serviceURL + "Update_EquipmentState/" + Name + "/";
-		url += bool ? "System.Boolean/" : "System.Int/"; //TODO
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
