@@ -3,6 +3,10 @@ package sb.interactioners;
 import sb.actioners.IActioner;
 
 public class LightInterActioner implements IActioner, IInterActioner {
+	
+	public LightInterActioner(String lightName) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public String getName() {
