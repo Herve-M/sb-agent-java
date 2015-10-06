@@ -1,40 +1,52 @@
 package sb.interactioners;
 
 import sb.actioners.IActioner;
+import sb.jsonapi.JSEquipement;
+import sb.jsonapi.MSJson;
 
 public class ShutterInterActioner implements IInterActioner, IActioner {
+	
+	private String 	_name;
+	private boolean _state;
+	private int 	_value;
 
 	public ShutterInterActioner(String shutterName) {
-		// TODO Auto-generated constructor stub
+		_name = shutterName;	
+		updateData();
 	}
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name;
 	}
 
 	@Override
 	public boolean getState() {
-		// TODO Auto-generated method stub
-		return false;
+		updateData();
+		return _state;
 	}
 
 	@Override
 	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		updateData();
+		return _value;
 	}
 
 	@Override
 	public boolean setValue(int value) {
-		// TODO Auto-generated method stub
-		return false;
+		return MSJson.updateEquipement(_name, false, String.valueOf(_value));
 	}
 
 	@Override
 	public String getTypeCode() {
 		return "V";
+	}
+	
+	private void updateData() {
+		JSEquipement equipement = MSJson.getEquipement(_name);
+		//TODO see Type ?
+		this._state = equipement != null ? true : false;
+		this._value = Integer.parseInt(equipement.value);
 	}
 
 }
