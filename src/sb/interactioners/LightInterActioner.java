@@ -34,7 +34,7 @@ public class LightInterActioner implements IActioner, IInterActioner {
 
 	@Override
 	public boolean setValue(int value) {
-		return MSJson.updateEquipement(_name, false, String.valueOf(_value));
+		return MSJson.updateEquipement(_name, false, String.valueOf(value == 1 ? true : false));
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ShutterInterActioner implements IInterActioner, IActioner {
 
 	@Override
 	public boolean setValue(int value) {
-		return MSJson.updateEquipement(_name, false, String.valueOf(_value));
+		return MSJson.updateEquipement(_name, false, String.valueOf(value));
 	}
 
 	@Override
