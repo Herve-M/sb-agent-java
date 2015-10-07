@@ -1,14 +1,17 @@
 package sb.setup;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
-import jade.util.ExtendedProperties;
-import jade.util.leap.Properties;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
+import sb.helpers.ClassificationHelper;
+import sb.helpers.ECategoryHelper;
+import sb.helpers.ETypeHelper;
 
 public class Room001 implements ISetup {
 	
@@ -31,10 +34,55 @@ public class Room001 implements ISetup {
 			AgentContainer agentContainer = runtime.createAgentContainer(impl);
 			//TODO Add Agent
 			AgentController masterController = agentContainer.createNewAgent("AGT-001", "sb.agents.DoorMasterAgent", new Object[]{});
+			
+			List<AgentController> agents = new ArrayList<AgentController>();
+			
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HLT, 1),
+					"sb.agents.HLTAgent", new Object[]{
+							"1",
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.LUMINOSITY, 1),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.TEMPERATURE, 1),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HUMIDITY, 1),
+							}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HLT, 2),
+					"sb.agents.HLTAgent", new Object[]{
+							"1",
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.LUMINOSITY, 2),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.TEMPERATURE, 2),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HUMIDITY, 2),
+							}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HLT, 3),
+					"sb.agents.HLTAgent",
+					new Object[]{
+							"1",
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.LUMINOSITY, 3),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.TEMPERATURE, 3),
+							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HUMIDITY, 3),
+							}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 1),
+					"sb.agents.Presence", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 1)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 2),
+					"sb.agents.Presence", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 2)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 1),
+					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 1)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 2),
+					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 2)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 3),
+					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 3)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 4),
+					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 4)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5),
+					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5)}));
 			//ENDTODO
+			agentContainer.start();
+			
+			for (AgentController agentController : agents) {
+				agentController.start();
+			}
+			
 			return true;
 		} catch (Exception e) {
-			System.err.println("Can't start Main Container : "+e.getMessage());
+			System.err.println("Can't start : "+e.getMessage());
 		}
 		return false;
 	}

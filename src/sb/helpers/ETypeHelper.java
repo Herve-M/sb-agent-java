@@ -8,7 +8,8 @@ public enum ETypeHelper {
 	IO("F"),
 	SHUTTER("V"),
 	LIGHT("L"),
-	HEATING("C");
+	HEATING("C"),
+	HLT("HLT");
 	
 	ETypeHelper(String code){
 		this._code = code;
