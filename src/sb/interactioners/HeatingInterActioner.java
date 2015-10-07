@@ -34,7 +34,7 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 
 	@Override
 	public boolean setValue(int value) {
-		return MSJson.updateEquipement(_name, false, String.valueOf(value));
+		return MSJson.updateEquipment(_name, String.valueOf(value));
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	}
 	
 	private void updateData() {
-		JSEquipement equipement = MSJson.getEquipement(_name);
+		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
 		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);

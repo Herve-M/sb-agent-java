@@ -15,7 +15,7 @@ public class LuminosityActioner implements IActioner {
 	}
 	
 	private void updateData() {
-		JSEquipement equipement = MSJson.getEquipement(_name);
+		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
 		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);

@@ -14,6 +14,11 @@ public class MSJson {
 	
 	private static String _serviceURL = "http://localhost:8000/";
 	
+	/**
+	 * Get URL content in string
+	 * @param URL
+	 * @return
+	 */
 	private static String getUrlContent(String URL){
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
@@ -43,8 +48,12 @@ public class MSJson {
 		return sb.toString();
 	}
 	
-	
-	public static JSEquipement getEquipement(String Name){
+	/**
+	 * Return a JSEquipement from name
+	 * @param Name
+	 * @return
+	 */
+	public static JSEquipement getEquipment(String Name){
 		String url = _serviceURL + "Get_Equipment/" + Name;
 		String json = getUrlContent(url);
 		
@@ -61,8 +70,43 @@ public class MSJson {
 		return jsEquipement;
 	}
 	
-	public static boolean updateEquipement(String Name, boolean bool, String value){
+	/**
+	 * Update a Equipment with Name (identifier)
+	 * @param Name
+	 * @param bool If data is boolean or not
+	 * @param value
+	 * @return
+	 */
+	public static boolean updateEquipment(String Name, String value){
 		String url = _serviceURL + "Update_EquipmentState/" + Name + "/";
+		url += value;
+		
+		HttpURLConnection httpConnection = null;
+		InputStreamReader in = null;
+		try {
+			URL uri = new URL(url);
+			httpConnection = (HttpURLConnection) uri.openConnection();
+			if (httpConnection != null)
+				httpConnection.setReadTimeout(60 * 1000);
+			if(httpConnection.getResponseCode() != 200)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while calling URL:"+ url, e);
+		}
+	}
+	
+	/**
+	 * Add a equipment.
+	 * @param Name
+	 * @param type
+	 * @param value
+	 * @return
+	 */
+	public static boolean addEquipment(String Name, ENetType type, String value){
+		String url = _serviceURL + "Add_Equipement/" + Name + "/";
+		url += type.toString() + "/";
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
