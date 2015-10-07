@@ -1,13 +1,18 @@
 package sb.agents;
 
-import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import sb.actioners.HumidityActioner;
+import sb.actioners.LuminosityActioner;
+import sb.actioners.TemperatureActioner;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.sensors.HumiditySensors;
+import sb.sensors.LuminositySensors;
+import sb.sensors.TemperatureSensors;
 
 public class HLTAgent extends DefaultAgent {
 
@@ -22,12 +27,25 @@ public class HLTAgent extends DefaultAgent {
 			for (int i = 0; i < args.length; i++) {
 				_strAgrs [i] = (String) args[i];
 			}
+			
+			registerDescription();
+			
+			registerBehaviours();
 		}
 		else {
 			doDelete();
 		}
-		
-		registerDescription();
+	}
+
+	private void registerBehaviours() {
+		System.out.println("Agent : " 
+				+ getAID().getName()
+				+ "\n\t"
+				+ "Registration Behaviours");
+
+	    addBehaviour(new LuminositySensors(this, new LuminosityActioner(_strAgrs[1])));
+	    addBehaviour(new TemperatureSensors(this, new TemperatureActioner(_strAgrs[2])));
+	    addBehaviour(new HumiditySensors(this, new HumidityActioner(_strAgrs[3])));
 	}
 
 	private void registerDescription() {

@@ -18,16 +18,12 @@ import sb.helpers.ETypeHelper;
  */
 public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	
-	private ECategoryHelper _category;
-	private ETypeHelper 	_type;
-	private int				_roomNumber;
+	private String			_roomNumber;
 	private DefaultAgent	_agent;
 	private Agent 			_jadeAgent;
 
-	public AgentDiscoveryBehaviour(Agent a, ECategoryHelper category, ETypeHelper type, int roomNumber) {
+	public AgentDiscoveryBehaviour(Agent a, String roomNumber) {
 		super(a, 5000);
-		_category = category;
-		_type = type;
 		_roomNumber = roomNumber;
 		_agent = (DefaultAgent)a;
 	}
@@ -35,19 +31,15 @@ public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	@Override
 	protected void onTick() {
 		DFAgentDescription researchTemplate = new DFAgentDescription();
-		// Classification Description
-		ServiceDescription typeDescription = new ServiceDescription();
-		typeDescription.setType(ClassificationHelper.getCategoryCode(_category, _type));
 		// Room Description
 		ServiceDescription roomDescription = new ServiceDescription();
-		roomDescription.setType(String.valueOf(_roomNumber));
+		roomDescription.setType(_roomNumber);
 		
-		researchTemplate.addServices(typeDescription);
 		researchTemplate.addServices(roomDescription);
 		try {
 			DFAgentDescription[] result = DFService.search(_jadeAgent, researchTemplate); 
 			for (DFAgentDescription dfAgentDescription : result) {
-				if(!_agent.receivers.contains(dfAgentDescription))
+				if(!_agent.receivers.contains(dfAgentDescription) && dfAgentDescription.getName() != myAgent.getAID())
 					_agent.receivers.add(dfAgentDescription.getName());
 			}
 		}

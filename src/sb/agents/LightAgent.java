@@ -1,13 +1,15 @@
 package sb.agents;
 
-import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import sb.equipment.LightEquipment;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.interactioners.LightInterActioner;
+import sb.sensors.LightSensors;
 
 public class LightAgent extends DefaultAgent {
 
@@ -22,12 +24,23 @@ public class LightAgent extends DefaultAgent {
 			for (int i = 0; i < args.length; i++) {
 				_strAgrs [i] = (String) args[i];
 			}
+		
+			registerDescription();
+			
+			registerBehaviours();
 		}
 		else {
 			doDelete();
 		}
-		
-		registerDescription();
+	}
+
+	private void registerBehaviours() {
+		System.out.println("Agent : " 
+				+ getAID().getName()
+				+ "\n\t"
+				+ "Registration Behaviours");
+
+	    addBehaviour(new LightSensors(this, new LightInterActioner(_strAgrs[1])));
 	}
 
 	private void registerDescription() {

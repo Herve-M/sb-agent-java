@@ -1,6 +1,5 @@
 package sb.agents;
 
-import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -8,6 +7,8 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.interactioners.HeatingInterActioner;
+import sb.sensors.HeatingSensors;
 
 public class HeatingAgent extends DefaultAgent {
 
@@ -22,12 +23,23 @@ public class HeatingAgent extends DefaultAgent {
 			for (int i = 0; i < args.length; i++) {
 				_strAgrs [i] = (String) args[i];
 			}
+			
+			registerDescription();
+			
+			registerBehaviours();
 		}
 		else {
 			doDelete();
 		}
-		
-		registerDescription();
+	}
+
+	private void registerBehaviours() {
+		System.out.println("Agent : " 
+				+ getAID().getName()
+				+ "\n\t"
+				+ "Registration Behaviours");
+
+	    addBehaviour(new HeatingSensors(this, new HeatingInterActioner(_strAgrs[1])));
 	}
 
 	private void registerDescription() {

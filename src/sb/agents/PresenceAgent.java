@@ -1,13 +1,14 @@
 package sb.agents;
 
-import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import sb.actioners.PresenceActioner;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.sensors.PresenceSensors;
 
 public class PresenceAgent extends DefaultAgent {
 	private String _strAgrs[] = new String[20];
@@ -21,12 +22,23 @@ public class PresenceAgent extends DefaultAgent {
 			for (int i = 0; i < args.length; i++) {
 				_strAgrs[i] = (String) args[i];
 			}
+			
+			registerDescription();
+			
+			registerBehaviours();
 		}
 		else {
 			doDelete();
 		}
-		
-		registerDescription();
+	}
+
+	private void registerBehaviours() {
+		System.out.println("Agent : " 
+				+ getAID().getName()
+				+ "\n\t"
+				+ "Registration Behaviours");
+
+	    addBehaviour(new PresenceSensors(this, new PresenceActioner(_strAgrs[1])));
 	}
 
 	private void registerDescription() {
