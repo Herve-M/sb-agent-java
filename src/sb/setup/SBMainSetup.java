@@ -28,10 +28,12 @@ public class SBMainSetup {
         scanner.close();
         if(choice < _setups.size()){
         	_setups.get(choice).setup();
+        	this.EXIT = true;
         } else if(choice == _setups.size()) {
         	for (ISetup iSetup : _setups) {
 				iSetup.setup();
 			}
+        	this.EXIT = true;
         } else if (choice > _setups.size()) {
         	this.EXIT = true;
         }
