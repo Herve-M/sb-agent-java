@@ -1,9 +1,12 @@
 package sb.sensors;
 
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
+import jade.lang.acl.ACLMessage;
 import sb.actioners.TemperatureActioner;
 import sb.agents.DefaultAgent;
+import sb.jsonapi.ENetType;
 
 @SuppressWarnings("serial")
 public class TemperatureSensors extends TickerBehaviour {
@@ -23,8 +26,11 @@ public class TemperatureSensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_temperature.getState()){
 			if(_temperature.getValue() != _temperatureState){
-				//TODO sendMSG
+				_temperatureState = _temperature.getValue();
+				_defaultAgent.sendInform(ENetType.TEMPERATURE, String.valueOf(_temperatureState));
 			}
-		}		
+		} else {
+			_defaultAgent.sendFailure(ENetType.TEMPERATURE);
+		}
 	}
 }

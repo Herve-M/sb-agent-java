@@ -106,7 +106,7 @@ public class MSJson {
 	 */
 	public static boolean addEquipment(String Name, ENetType type, String value){
 		String url = _serviceURL + "Add_Equipement/" + Name + "/";
-		url += type.toString() + "/";
+		url += type.toCode() + "/";
 		url += value;
 		
 		HttpURLConnection httpConnection = null;

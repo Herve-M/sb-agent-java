@@ -11,57 +11,31 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.helpers.ClassificationHelper;
+import sb.jsonapi.ENetType;
 
 public class DefaultAgent extends Agent {
-	public List<AID> 	receivers;
-	private String strAgrs[] = new String[20];
-	public String targetedObject;
+	public List<AID> 	receivers;	
+	public String 		targetedObject;
 	
-	@Override
-	protected void setup() {
-		System.out.println("Agent INIT : " + getAID().getName());
-		
-		Object args[] = getArguments();
-		if(args != null && args.length > 0){
-			for (int i = 0; i < args.length; i++) {
-				strAgrs[i] = (String) args[i];
-			}
-		}
-		else {
-			doDelete();
-		}
-		
-		//Directory
-		DFAgentDescription agentDescription = new DFAgentDescription();
-		agentDescription.setName(getAID());
-		ServiceDescription serviceDescription = new ServiceDescription();
-		//TODO
-		//serviceDescription.setType(ClassificationHelper.getCategoryCode(category, type));
-		//serviceDescription.setName(ClassificationHelper.getClassifcationCode(category, type, number));
-		agentDescription.addServices(serviceDescription);
-		
-		try {
-			DFService.register(this, agentDescription);
-		} catch (FIPAException  e) {
-			e.printStackTrace();
-		}
-	    
-	    //Behavior
-	    //addBehaviour(AgentDiscoveryBehaviour(this, ));
-		//addBehaviour(LightEquipment(this, false));
-		
-		//doDelete();
-	}	
 	
-	@Override
-	protected void takeDown() {
-		
-		try {
-			DFService.deregister(this);
-		} catch (FIPAException  e) {
-			e.printStackTrace();
+	public void sendInform(ENetType type, String value){
+		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+		for (AID agent : receivers) {
+			msg.addReceiver(agent);
 		}
-		
-		System.out.println("Agent SHUTDOWN : "+getAID().getName());
+		msg.setLanguage("English");
+		msg.setOntology(type+"-EVENT");
+		msg.setContent(value);
+		this.send(msg);
+	}
+	
+	public void sendFailure(ENetType type){
+		ACLMessage msg = new ACLMessage(ACLMessage.FAILURE);
+		for (AID agent : receivers) {
+			msg.addReceiver(agent);
+		}
+		msg.setLanguage("English");
+		msg.setOntology(type+"-EVENT");
+		this.send(msg);
 	}
 }

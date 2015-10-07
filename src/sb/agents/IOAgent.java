@@ -4,7 +4,7 @@ import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 
-public class IOAgent extends Agent {
+public class IOAgent extends DefaultAgent {
 
 	private String strAgrs[] = new String[20];
 

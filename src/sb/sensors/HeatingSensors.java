@@ -3,6 +3,7 @@ package sb.sensors;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import sb.interactioners.HeatingInterActioner;
+import sb.jsonapi.ENetType;
 import sb.agents.DefaultAgent;
 
 @SuppressWarnings("serial")
@@ -22,7 +23,10 @@ public class HeatingSensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_heating.getState()){
 			if(_heating.getValue() != _heatingState){
-				//TODO sendMSG
+				_heatingState = _heating.getValue();
+				_defaultAgent.sendInform(ENetType.HEATING, String.valueOf(_heatingState));
+			} else {
+				_defaultAgent.sendFailure(ENetType.HEATING);
 			}
 		}
 	}

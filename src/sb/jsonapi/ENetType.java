@@ -15,8 +15,7 @@ public enum ENetType {
 		this._code = code;
 	}
 	
-	@Override
-	public String toString() {
+	public String toCode() {
 		return _code;
 	}
 	

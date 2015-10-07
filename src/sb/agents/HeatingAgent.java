@@ -4,7 +4,7 @@ import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 
-public class HeatingAgent extends Agent {
+public class HeatingAgent extends DefaultAgent {
 
 	private String strAgrs[] = new String[20];
 

@@ -4,7 +4,7 @@ import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 
-public class LuminosityAgent extends Agent {
+public class LuminosityAgent extends DefaultAgent {
 
 /*	private String strAgrs[] = new String[20];
 
