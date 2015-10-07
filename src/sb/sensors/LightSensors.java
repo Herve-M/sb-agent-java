@@ -3,6 +3,7 @@ package sb.sensors;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import sb.interactioners.LightInterActioner;
+import sb.jsonapi.ENetType;
 import sb.agents.DefaultAgent;
 
 @SuppressWarnings("serial")
@@ -22,7 +23,10 @@ public class LightSensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_light.getState()){
 			if(_light.getValue() != _lightState){
-				//TODO sendMSG
+				_lightState = _light.getValue();
+				_defaultAgent.sendInform(ENetType.LIGHT, String.valueOf(_lightState));
+			} else {
+				_defaultAgent.sendFailure(ENetType.LIGHT);
 			}
 		}
 	}

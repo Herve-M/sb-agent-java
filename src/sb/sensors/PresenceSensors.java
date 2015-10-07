@@ -4,7 +4,7 @@ import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import sb.actioners.PresenceActioner;
 import sb.agents.DefaultAgent;
-
+import sb.jsonapi.ENetType;
 import jade.core.behaviours.TickerBehaviour;
 
 @SuppressWarnings("serial")
@@ -24,7 +24,10 @@ public class PresenceSensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_presence.getState()){
 			if(_presence.getValue() != _presenceState){
-				//TODO sendMSG
+				_presenceState = _presence.getValue();
+				_defaultAgent.sendInform(ENetType.PRESENCE, String.valueOf(_presenceState));
+			} else {
+				_defaultAgent.sendFailure(ENetType.PRESENCE);
 			}
 		}
 	}

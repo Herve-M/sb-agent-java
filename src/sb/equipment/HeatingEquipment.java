@@ -18,8 +18,6 @@ public class HeatingEquipment extends jade.core.behaviours.OneShotBehaviour {
 	public void action() {
 		DefaultAgent agent = (DefaultAgent) myAgent;
 		HeatingInterActioner hia = new HeatingInterActioner(agent.targetedObject);
-		hia.setValue(this.value);
-		
+		hia.setValue(this.value);		
 	}
-
 }

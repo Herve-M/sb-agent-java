@@ -4,6 +4,7 @@ import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import sb.actioners.HumidityActioner;
 import sb.agents.DefaultAgent;
+import sb.jsonapi.ENetType;
 
 @SuppressWarnings("serial")
 public class HumiditySensors extends TickerBehaviour {
@@ -22,7 +23,10 @@ public class HumiditySensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_humidity.getState()){
 			if(_humidity.getValue() != _humidityState){
-				//TODO sendMSG
+				_humidityState = _humidity.getValue();
+				_defaultAgent.sendInform(ENetType.HUMIDITY, String.valueOf(_humidityState));
+			} else {
+				_defaultAgent.sendFailure(ENetType.HUMIDITY);
 			}
 		}		
 	}

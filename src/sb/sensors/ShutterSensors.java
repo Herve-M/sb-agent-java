@@ -3,6 +3,7 @@ package sb.sensors;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import sb.interactioners.ShutterInterActioner;
+import sb.jsonapi.ENetType;
 import sb.agents.DefaultAgent;
 
 @SuppressWarnings("serial")
@@ -22,7 +23,10 @@ public class ShutterSensors extends TickerBehaviour {
 	protected void onTick() {
 		if(_shutter.getState()){
 			if(_shutter.getValue() != _shutterState){
-				//TODO sendMSG
+				_shutterState = _shutter.getValue();
+				_defaultAgent.sendInform(ENetType.SHUTTER, String.valueOf(_shutterState));
+			} else {
+				_defaultAgent.sendFailure(ENetType.SHUTTER);
 			}
 		}
 

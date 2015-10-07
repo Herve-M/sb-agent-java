@@ -6,7 +6,7 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
-public class PresenceAgent extends Agent {
+public class PresenceAgent extends DefaultAgent {
 	private String strAgrs[] = new String[20];
 
 	@Override
