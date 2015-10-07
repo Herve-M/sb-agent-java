@@ -10,5 +10,10 @@ public enum ECategoryHelper {
 		this._code = code;
 	}
 	
+	@Override
+	public String toString() {
+		return  _code;
+	}
+	
 	private final String _code;				
 }

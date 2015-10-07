@@ -1,5 +1,6 @@
 package sb.agents;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jade.core.AID;
@@ -14,7 +15,7 @@ import sb.helpers.ClassificationHelper;
 import sb.jsonapi.ENetType;
 
 public class DefaultAgent extends Agent {
-	public List<AID> 	receivers;	
+	public List<AID> 	receivers = new ArrayList<>();	
 	public String 		targetedObject;
 	
 	

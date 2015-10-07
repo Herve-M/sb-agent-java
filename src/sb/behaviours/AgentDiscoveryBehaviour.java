@@ -20,7 +20,6 @@ public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	
 	private String			_roomNumber;
 	private DefaultAgent	_agent;
-	private Agent 			_jadeAgent;
 
 	public AgentDiscoveryBehaviour(Agent a, String roomNumber) {
 		super(a, 5000);
@@ -37,11 +36,15 @@ public class AgentDiscoveryBehaviour extends TickerBehaviour {
 		
 		researchTemplate.addServices(roomDescription);
 		try {
-			DFAgentDescription[] result = DFService.search(_jadeAgent, researchTemplate); 
-			for (DFAgentDescription dfAgentDescription : result) {
-				if(!_agent.receivers.contains(dfAgentDescription) && dfAgentDescription.getName() != myAgent.getAID())
-					_agent.receivers.add(dfAgentDescription.getName());
-			}
+			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate); 
+			if(result != null){
+				for (DFAgentDescription dfAgentDescription : result) {
+					if(!_agent.receivers.contains(dfAgentDescription) && dfAgentDescription.getName() != myAgent.getAID())
+						_agent.receivers.add(dfAgentDescription.getName());
+				}
+			} else {
+				_agent.receivers.clear();
+			}			
 		}
 		catch (FIPAException fe) {
 			System.err.println("AGT-DISC-BHR Err : "+fe.getMessage());

@@ -9,10 +9,16 @@ public enum ETypeHelper {
 	SHUTTER("V"),
 	LIGHT("L"),
 	HEATING("C"),
+	HLT("HLT"),
 	NONE("N");
 	
 	ETypeHelper(String code){
 		this._code = code;
+	}
+	
+	@Override
+	public String toString() {
+		return _code;
 	}
 	
 	private final String _code;
