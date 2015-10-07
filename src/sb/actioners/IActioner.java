@@ -5,5 +5,4 @@ public interface IActioner {
 	String 		getTypeCode();
 	boolean		getState();
 	int 		getValue();
-	boolean 	setValue(int value);
 }

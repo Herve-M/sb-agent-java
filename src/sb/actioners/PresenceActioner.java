@@ -1,11 +1,29 @@
 package sb.actioners;
 
+import sb.jsonapi.JSEquipement;
+import sb.jsonapi.MSJson;
+
 public class PresenceActioner implements IActioner {
+	
+	private String 	_name;
+	private boolean _state;
+	private boolean _value;
+	
+	public PresenceActioner(String Name) {
+		_name = Name;	
+		updateData();
+	}
+	
+	private void updateData() {
+		JSEquipement equipement = MSJson.getEquipment(_name);
+		//TODO see Type ?
+		this._state = equipement != null ? true : false;
+		this._value = Boolean.parseBoolean(equipement.value);
+	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name;
 	}
 
 	@Override
@@ -15,20 +33,13 @@ public class PresenceActioner implements IActioner {
 
 	@Override
 	public boolean getState() {
-		// TODO Auto-generated method stub
-		return false;
+		updateData();
+		return _state;
 	}
 
 	@Override
 	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		updateData();
+		return _value ? 1 : 0;
 	}
-
-	@Override
-	public boolean setValue(int value) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

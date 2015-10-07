@@ -1,11 +1,29 @@
 package sb.actioners;
 
+import sb.jsonapi.JSEquipement;
+import sb.jsonapi.MSJson;
+
 public class TemperatureActioner implements IActioner {
+	
+	private String 	_name;
+	private boolean _state;
+	private int 	_value;
+	
+	public TemperatureActioner(String Name) {
+		_name = Name;	
+		updateData();
+	}
+	
+	private void updateData() {
+		JSEquipement equipement = MSJson.getEquipment(_name);
+		//TODO see Type ?
+		this._state = equipement != null ? true : false;
+		this._value = Integer.parseInt(equipement.value);
+	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name;
 	}
 
 	@Override
@@ -15,20 +33,13 @@ public class TemperatureActioner implements IActioner {
 
 	@Override
 	public boolean getState() {
-		// TODO Auto-generated method stub
-		return false;
+		updateData();
+		return _state;
 	}
 
 	@Override
 	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		updateData();
+		return _value;
 	}
-
-	@Override
-	public boolean setValue(int value) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
