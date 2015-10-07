@@ -28,6 +28,7 @@ public class DefaultAgent extends Agent {
 		msg.setOntology(type+"-EVENT");
 		msg.setContent(value);
 		this.send(msg);
+		System.out.println(msg.toString());
 	}
 	
 	public void sendFailure(ENetType type){
@@ -38,5 +39,6 @@ public class DefaultAgent extends Agent {
 		msg.setLanguage("English");
 		msg.setOntology(type+"-EVENT");
 		this.send(msg);
+		System.out.println(msg.toString());
 	}
 }

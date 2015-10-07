@@ -5,6 +5,7 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.actioners.PresenceActioner;
+import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -38,6 +39,7 @@ public class PresenceAgent extends DefaultAgent {
 				+ "\n\t"
 				+ "Registration Behaviours");
 
+		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
 	    addBehaviour(new PresenceSensors(this, new PresenceActioner(_strAgrs[1])));
 	}
 

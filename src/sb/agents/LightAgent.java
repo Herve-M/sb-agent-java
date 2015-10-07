@@ -4,6 +4,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.equipment.LightEquipment;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
@@ -39,7 +40,8 @@ public class LightAgent extends DefaultAgent {
 				+ getAID().getName()
 				+ "\n\t"
 				+ "Registration Behaviours");
-
+		
+		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
 	    addBehaviour(new LightSensors(this, new LightInterActioner(_strAgrs[1])));
 	}
 

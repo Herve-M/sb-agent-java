@@ -24,9 +24,10 @@ public class LuminositySensors extends TickerBehaviour {
 			if(_luminosity.getValue() != _luminosityState){
 				_luminosityState = _luminosity.getValue();
 				_defaultAgent.sendInform(ENetType.LUMINOSITY, String.valueOf(_luminosityState));
-			} else {
-				_defaultAgent.sendFailure(ENetType.LUMINOSITY);
-			}
+				System.out.println("LuminositySensors state changed");
+			} 
+		} else {
+			_defaultAgent.sendFailure(ENetType.LUMINOSITY);
 		}
 	}
 

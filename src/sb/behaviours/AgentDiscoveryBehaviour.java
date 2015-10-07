@@ -12,7 +12,7 @@ import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
 /**
- * This behavior update the Agent 
+ * This behavior update the Agent
  * @author Hervé
  *
  */
@@ -30,17 +30,25 @@ public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	@Override
 	protected void onTick() {
 		DFAgentDescription researchTemplate = new DFAgentDescription();
+		// Agent Description
+		ServiceDescription agentDescription = new ServiceDescription();
+		agentDescription.setName("CLASS");
+		agentDescription.setType(ClassificationHelper.getCategoryCode(ECategoryHelper.AGENT, ETypeHelper.NONE));
 		// Room Description
-		ServiceDescription roomDescription = new ServiceDescription();
+		ServiceDescription roomDescription  = new ServiceDescription();
+		roomDescription.setName("ROOMID");
 		roomDescription.setType(_roomNumber);
 		
+		researchTemplate.addServices(agentDescription);
 		researchTemplate.addServices(roomDescription);
 		try {
 			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate); 
 			if(result != null){
 				for (DFAgentDescription dfAgentDescription : result) {
-					if(!_agent.receivers.contains(dfAgentDescription) && dfAgentDescription.getName() != myAgent.getAID())
+					if(!_agent.receivers.contains(dfAgentDescription.getName()) && dfAgentDescription.getName() != myAgent.getAID()){
 						_agent.receivers.add(dfAgentDescription.getName());
+						System.out.println(_agent.receivers.toString());
+					}
 				}
 			} else {
 				_agent.receivers.clear();

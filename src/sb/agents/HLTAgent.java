@@ -7,6 +7,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.actioners.HumidityActioner;
 import sb.actioners.LuminosityActioner;
 import sb.actioners.TemperatureActioner;
+import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -42,7 +43,8 @@ public class HLTAgent extends DefaultAgent {
 				+ getAID().getName()
 				+ "\n\t"
 				+ "Registration Behaviours");
-
+		
+		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
 	    addBehaviour(new LuminositySensors(this, new LuminosityActioner(_strAgrs[1])));
 	    addBehaviour(new TemperatureSensors(this, new TemperatureActioner(_strAgrs[2])));
 	    addBehaviour(new HumiditySensors(this, new HumidityActioner(_strAgrs[3])));
