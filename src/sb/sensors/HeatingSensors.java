@@ -25,9 +25,9 @@ public class HeatingSensors extends TickerBehaviour {
 			if(_heating.getValue() != _heatingState){
 				_heatingState = _heating.getValue();
 				_defaultAgent.sendInform(ENetType.HEATING, String.valueOf(_heatingState));
-			} else {
-				_defaultAgent.sendFailure(ENetType.HEATING);
 			}
+		} else {
+			_defaultAgent.sendFailure(ENetType.HEATING);
 		}
 	}
 

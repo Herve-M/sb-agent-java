@@ -4,6 +4,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -39,6 +40,7 @@ public class HeatingAgent extends DefaultAgent {
 				+ "\n\t"
 				+ "Registration Behaviours");
 
+		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
 	    addBehaviour(new HeatingSensors(this, new HeatingInterActioner(_strAgrs[1])));
 	}
 

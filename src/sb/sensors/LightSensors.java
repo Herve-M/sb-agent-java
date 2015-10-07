@@ -25,9 +25,10 @@ public class LightSensors extends TickerBehaviour {
 			if(_light.getValue() != _lightState){
 				_lightState = _light.getValue();
 				_defaultAgent.sendInform(ENetType.LIGHT, String.valueOf(_lightState));
-			} else {
-				_defaultAgent.sendFailure(ENetType.LIGHT);
-			}
+				System.out.println("LightSensors state changed");
+			} 
+		} else {
+			_defaultAgent.sendFailure(ENetType.LIGHT);
 		}
 	}
 

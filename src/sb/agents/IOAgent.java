@@ -5,6 +5,7 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.actioners.IOActioner;
+import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -39,6 +40,7 @@ public class IOAgent extends DefaultAgent {
 				+ "\n\t"
 				+ "Registration Behaviours");
 
+		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
 	    addBehaviour(new IOSensors(this, new IOActioner(_strAgrs[1])));
 	}
 

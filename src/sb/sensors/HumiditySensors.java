@@ -25,9 +25,9 @@ public class HumiditySensors extends TickerBehaviour {
 			if(_humidity.getValue() != _humidityState){
 				_humidityState = _humidity.getValue();
 				_defaultAgent.sendInform(ENetType.HUMIDITY, String.valueOf(_humidityState));
-			} else {
-				_defaultAgent.sendFailure(ENetType.HUMIDITY);
 			}
-		}		
+		} else {
+			_defaultAgent.sendFailure(ENetType.HUMIDITY);
+		}	
 	}
 }

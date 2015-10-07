@@ -26,9 +26,9 @@ public class IOSensors extends TickerBehaviour{
 			if (_ioActioner.getValue() != _ioState) {
 				_ioState = _ioActioner.getValue();
 				_defaultAgent.sendInform(ENetType.IO, String.valueOf(_ioState));
-			} else {
-				_defaultAgent.sendFailure(ENetType.IO);
 			}
+		} else {
+			_defaultAgent.sendFailure(ENetType.IO);
 		}
 	}
 	
