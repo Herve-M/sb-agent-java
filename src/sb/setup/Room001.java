@@ -32,8 +32,6 @@ public class Room001 implements ISetup {
 			impl.setParameter(ProfileImpl.MAIN_HOST, "localhost");
 			impl.setParameter(ProfileImpl.CONTAINER_NAME, "CTN-101");
 			AgentContainer agentContainer = runtime.createAgentContainer(impl);
-			//TODO Add Agent
-			AgentController masterController = agentContainer.createNewAgent("AGT-001", "sb.agents.DoorMasterAgent", new Object[]{});
 			
 			List<AgentController> agents = new ArrayList<AgentController>();
 			
@@ -60,9 +58,9 @@ public class Room001 implements ISetup {
 							ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.HUMIDITY, 3),
 							}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 1),
-					"sb.agents.Presence", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 1)}));
+					"sb.agents.PresenceAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 1)}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 2),
-					"sb.agents.Presence", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 2)}));
+					"sb.agents.PresenceAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE, 2)}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 1),
 					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 1)}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 2),
@@ -73,7 +71,11 @@ public class Room001 implements ISetup {
 					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 4)}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5),
 					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5)}));
-			//ENDTODO
+			
+			//Master
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getCategoryCode(ECategoryHelper.AGENT, ETypeHelper.NONE),
+					"sb.agents.MasterAgent", new Object[]{"1"}));
+			
 			agentContainer.start();
 			
 			for (AgentController agentController : agents) {

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MSJson {
 	
-	private static String _serviceURL = "http://10.167.128.231:8000/";
+	private static String _serviceURL = "http://localhost:8000/";
 	
 	/**
 	 * Get URL content in string
