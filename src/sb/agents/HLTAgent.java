@@ -4,9 +4,9 @@ import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 
-public class HumidityAgent extends Agent {
+public class HLTAgent extends Agent {
 
-/*	private String strAgrs[] = new String[20];
+	private String strAgrs[] = new String[20];
 
 	@Override
 	protected void setup() {
@@ -37,6 +37,6 @@ public class HumidityAgent extends Agent {
 		System.out.println("Agent SHUTDOWN : " + getAID().getName());
 		
 		super.takeDown();
-	}*/
-
+	}
+	
 }

@@ -6,7 +6,7 @@ import jade.domain.FIPAException;
 
 public class LuminosityAgent extends Agent {
 
-	private String strAgrs[] = new String[20];
+/*	private String strAgrs[] = new String[20];
 
 	@Override
 	protected void setup() {
@@ -37,6 +37,6 @@ public class LuminosityAgent extends Agent {
 		System.out.println("Agent SHUTDOWN : " + getAID().getName());
 		
 		super.takeDown();
-	}
+	}*/
 
 }
