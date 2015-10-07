@@ -34,7 +34,7 @@ public class MainContainer implements ISetup {
 
 	@Override
 	public String getDescription() {
-		return new String("Start JADE Main Container");
+		return new String("Deploy JADE Main Container");
 	}
 
 	@Override

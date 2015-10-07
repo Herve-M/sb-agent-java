@@ -91,7 +91,7 @@ public class Room001 implements ISetup {
 
 	@Override
 	public String getDescription() {
-		return new String("Room 001 Setup");
+		return new String("Deploy Room 001");
 	}
 
 	@Override
