@@ -16,5 +16,10 @@ public enum ETypeHelper {
 		this._code = code;
 	}
 	
+	@Override
+	public String toString() {
+		return _code;
+	}
+	
 	private final String _code;
 }
