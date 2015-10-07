@@ -9,10 +9,10 @@ public class ClassificationHelper {
 	 * @return
 	 */
 	public static String getClassifcationCode(ECategoryHelper category, ETypeHelper type, int number){
-		return new String(category+"-"+type+"-"+String.format("%03d", number));		
+		return new String(category+(type == ETypeHelper.NONE ? "" : "-"+type)+"-"+String.format("%03d", number));		
 	}
 	
 	public static String getCategoryCode(ECategoryHelper category, ETypeHelper type){
-		return new String(category+"-"+type);
+		return new String(category+ (type == ETypeHelper.NONE ? "" : "-"+type));
 	}
 }
