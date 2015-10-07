@@ -1,6 +1,8 @@
 package sb.agents;
 
 import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
 
 public class HumidityAgent extends Agent {
 
@@ -25,7 +27,15 @@ public class HumidityAgent extends Agent {
 	
 	@Override
 	protected void takeDown() {
-		// TODO Auto-generated method stub
+		
+		try {
+			DFService.deregister(this);
+		} catch (FIPAException  e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Agent SHUTDOWN : " + getAID().getName());
+		
 		super.takeDown();
 	}
 
