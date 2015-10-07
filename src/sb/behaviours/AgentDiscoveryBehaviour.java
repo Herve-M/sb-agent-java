@@ -11,6 +11,11 @@ import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
+/**
+ * This behavior update the Agent 
+ * @author Hervé
+ *
+ */
 public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	
 	private ECategoryHelper _category;
@@ -29,15 +34,22 @@ public class AgentDiscoveryBehaviour extends TickerBehaviour {
 
 	@Override
 	protected void onTick() {
-		DFAgentDescription template = new DFAgentDescription();
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType(ClassificationHelper.getCategoryCode(_category, _type));
-		template.addServices(sd);
+		DFAgentDescription researchTemplate = new DFAgentDescription();
+		// Classification Description
+		ServiceDescription typeDescription = new ServiceDescription();
+		typeDescription.setType(ClassificationHelper.getCategoryCode(_category, _type));
+		// Room Description
+		ServiceDescription roomDescription = new ServiceDescription();
+		roomDescription.setType(String.valueOf(_roomNumber));
+		
+		researchTemplate.addServices(typeDescription);
+		researchTemplate.addServices(roomDescription);
 		try {
-			DFAgentDescription[] result = DFService.search(_jadeAgent, template); 
+			DFAgentDescription[] result = DFService.search(_jadeAgent, researchTemplate); 
 			for (DFAgentDescription dfAgentDescription : result) {
-				_agent.receivers.add(dfAgentDescription.getName());
-			}			
+				if(!_agent.receivers.contains(dfAgentDescription))
+					_agent.receivers.add(dfAgentDescription.getName());
+			}
 		}
 		catch (FIPAException fe) {
 			System.err.println("AGT-DISC-BHR Err : "+fe.getMessage());
