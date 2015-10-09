@@ -34,7 +34,10 @@ public enum ENetType {
 	LIGHT("6"),
 	
 	/** The heating. */
-	HEATING("8");
+	HEATING("8"), 
+	
+	/** The air conditioner. */
+	AIRCONDITIONER("9");
 	
 	/**
 	 * Instantiates a new e net type.
