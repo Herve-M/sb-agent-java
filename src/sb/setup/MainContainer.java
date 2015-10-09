@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.setup;
 
 import jade.core.ProfileImpl;
@@ -6,14 +11,23 @@ import jade.util.ExtendedProperties;
 import jade.util.leap.Properties;
 import jade.wrapper.AgentContainer;
 
+/**
+ * The Class MainContainer.
+ */
 public class MainContainer implements ISetup {
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#setArgs(java.lang.String[])
+	 */
 	@Override
 	public void setArgs(String[] args) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#setup()
+	 */
 	@Override
 	public boolean setup() {
 		try {
@@ -32,11 +46,17 @@ public class MainContainer implements ISetup {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#getDescription()
+	 */
 	@Override
 	public String getDescription() {
 		return new String("Deploy JADE Main Container");
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#getName()
+	 */
 	@Override
 	public String getName() {
 		return this.getClass().toString();

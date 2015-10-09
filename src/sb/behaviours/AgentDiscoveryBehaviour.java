@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Herv�
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.behaviours;
 
 import jade.core.Agent;
@@ -11,22 +16,35 @@ import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
+
 /**
- * This behavior update the Agent
- * @author Hervé
+ * This behavior update the Agent.
  *
+ * @author Hervé
  */
 public class AgentDiscoveryBehaviour extends TickerBehaviour {
 	
+	/** The _room number. */
 	private String			_roomNumber;
+	
+	/** The _agent. */
 	private DefaultAgent	_agent;
 
+	/**
+	 * Instantiates a new agent discovery behaviour.
+	 *
+	 * @param a the a
+	 * @param roomNumber the room number
+	 */
 	public AgentDiscoveryBehaviour(Agent a, String roomNumber) {
 		super(a, 5000);
 		_roomNumber = roomNumber;
 		_agent = (DefaultAgent)a;
 	}
 
+	/* (non-Javadoc)
+	 * @see jade.core.behaviours.TickerBehaviour#onTick()
+	 */
 	@Override
 	protected void onTick() {
 		DFAgentDescription researchTemplate = new DFAgentDescription();

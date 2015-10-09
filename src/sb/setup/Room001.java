@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.setup;
 
 import java.util.Map;
@@ -5,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
@@ -13,24 +19,34 @@ import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
+/**
+ * The Class Room001.
+ */
 public class Room001 implements ISetup {
 	
+	/** The _args. */
 	private Map<String, String> _args = new HashMap<String, String>();
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#setArgs(java.lang.String[])
+	 */
 	@Override
 	public void setArgs(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#setup()
+	 */
 	@Override
 	public boolean setup() {
 		try {
 			Runtime runtime = Runtime.instance();
 			//Container
 			ProfileImpl impl = new ProfileImpl(false);
-			impl.setParameter(ProfileImpl.MAIN_HOST, "localhost");
-			impl.setParameter(ProfileImpl.CONTAINER_NAME, "CTN-101");
+			impl.setParameter(Profile.MAIN_HOST, "localhost");
+			impl.setParameter(Profile.CONTAINER_NAME, "CTN-101");
 			AgentContainer agentContainer = runtime.createAgentContainer(impl);
 			
 			List<AgentController> agents = new ArrayList<AgentController>();
@@ -89,11 +105,17 @@ public class Room001 implements ISetup {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#getDescription()
+	 */
 	@Override
 	public String getDescription() {
 		return new String("Deploy Room 001");
 	}
 
+	/* (non-Javadoc)
+	 * @see sb.setup.ISetup#getName()
+	 */
 	@Override
 	public String getName() {
 		return this.getClass().toString();

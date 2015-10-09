@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.agents;
 
 import jade.domain.DFService;
@@ -11,10 +16,18 @@ import sb.helpers.ETypeHelper;
 import sb.interactioners.HeatingInterActioner;
 import sb.sensors.HeatingSensors;
 
+
+/**
+ * The Class HeatingAgent.
+ */
 public class HeatingAgent extends DefaultAgent {
 
+	/** The _str agrs. */
 	private String _strAgrs[] = new String[20];
 
+	/* (non-Javadoc)
+	 * @see jade.core.Agent#setup()
+	 */
 	@Override
 	protected void setup() {
 		System.out.println("Agent INIT : " + getAID().getName());
@@ -34,6 +47,9 @@ public class HeatingAgent extends DefaultAgent {
 		}
 	}
 
+	/**
+	 * Register behaviours.
+	 */
 	private void registerBehaviours() {
 		System.out.println("Agent : " 
 				+ getAID().getName()
@@ -44,6 +60,9 @@ public class HeatingAgent extends DefaultAgent {
 	    addBehaviour(new HeatingSensors(this, new HeatingInterActioner(_strAgrs[1])));
 	}
 
+	/**
+	 * Register description.
+	 */
 	private void registerDescription() {
 		System.out.println("Agent : " 
 				+ getAID().getName()
@@ -74,6 +93,9 @@ public class HeatingAgent extends DefaultAgent {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see jade.core.Agent#takeDown()
+	 */
 	@Override
 	protected void takeDown() {
 		

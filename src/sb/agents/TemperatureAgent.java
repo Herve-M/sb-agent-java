@@ -1,9 +1,13 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.agents;
 
-import jade.core.Agent;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
-
+/**
+ * The Class TemperatureAgent.
+ */
 public class TemperatureAgent extends DefaultAgent {
 
 /*	private String strAgrs[] = new String[20];
