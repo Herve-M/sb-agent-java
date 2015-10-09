@@ -40,7 +40,7 @@ public class ShutterAgent extends DefaultAgent {
 				_strAgrs [i] = (String) args[i];
 			}
 			
-			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE);
+			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.SHUTTER);
 			
 			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.ShutterSensors);			
 			registerBehaviours(behaviours);

@@ -26,9 +26,11 @@ import sb.behaviours.EBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.interactioners.HeatingInterActioner;
 import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
+import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
 import sb.sensors.IOSensors;
 import sb.sensors.LightSensors;
@@ -91,6 +93,9 @@ public class DefaultAgent extends Agent {
 					break;
 				case HumiditySensors:
 					addBehaviour(new HumiditySensors(this, new HumidityActioner(strAgrs[3])));
+					break;
+				case HeatingSensors:
+					addBehaviour(new HeatingSensors(this, new HeatingInterActioner(strAgrs[1])));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

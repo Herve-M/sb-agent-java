@@ -5,11 +5,14 @@
  */
 package sb.agents;
 
+import java.util.EnumSet;
+
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.behaviours.AgentDiscoveryBehaviour;
+import sb.behaviours.EBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -38,58 +41,13 @@ public class HeatingAgent extends DefaultAgent {
 				_strAgrs [i] = (String) args[i];
 			}
 			
-			registerDescription();
+			registerDescription(ECategoryHelper.AGENT, ETypeHelper.HEATING);
 			
-			registerBehaviours();
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.HeatingSensors);			
+			registerBehaviours(behaviours);
 		}
 		else {
 			doDelete();
-		}
-	}
-
-	/**
-	 * Register behaviours.
-	 */
-	private void registerBehaviours() {
-		System.out.println("Agent : " 
-				+ getAID().getName()
-				+ "\n\t"
-				+ "Registration Behaviours");
-
-		addBehaviour(new AgentDiscoveryBehaviour(this, _strAgrs[0]));
-	    addBehaviour(new HeatingSensors(this, new HeatingInterActioner(_strAgrs[1])));
-	}
-
-	/**
-	 * Register description.
-	 */
-	private void registerDescription() {
-		System.out.println("Agent : " 
-				+ getAID().getName()
-				+ "\n\t"
-				+ "Registration");
-		
-		DFAgentDescription ad = new DFAgentDescription();
-		ad.setName(getAID());
-		
-		ServiceDescription sd1 = new ServiceDescription();
-		sd1.setName("CLASS");
-		sd1.setOwnership(ad.getName().getName());
-		sd1.setType(ClassificationHelper.getCategoryCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING));
-		
-		ad.addServices(sd1);
-		
-		ServiceDescription sd2 = new ServiceDescription();
-		sd2.setName("ROOMID");
-		sd2.setOwnership(ad.getName().getName());
-		sd2.setType(_strAgrs[0]);
-		
-		ad.addServices(sd2);
-		
-		try {
-			DFService.register(this, ad);
-		} catch (FIPAException e) {
-			e.printStackTrace();
 		}
 	}
 }

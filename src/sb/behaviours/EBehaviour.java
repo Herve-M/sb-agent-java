@@ -8,5 +8,6 @@ public enum EBehaviour {
 	IOSensors,
 	LuminositySensors,
 	TemperatureSensors,
-	HumiditySensors
+	HumiditySensors,
+	HeatingSensors
 }
