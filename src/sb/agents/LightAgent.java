@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.agents;
 
 import jade.domain.DFService;
@@ -5,17 +10,24 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import sb.behaviours.AgentDiscoveryBehaviour;
-import sb.equipment.LightEquipment;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 import sb.interactioners.LightInterActioner;
 import sb.sensors.LightSensors;
 
+
+/**
+ * The Class LightAgent.
+ */
 public class LightAgent extends DefaultAgent {
 
+	/** The _str agrs. */
 	private String _strAgrs[] = new String[20];
 
+	/* (non-Javadoc)
+	 * @see jade.core.Agent#setup()
+	 */
 	@Override
 	protected void setup() {
 		System.out.println("Agent INIT : " + getAID().getName());
@@ -35,6 +47,9 @@ public class LightAgent extends DefaultAgent {
 		}
 	}
 
+	/**
+	 * Register behaviours.
+	 */
 	private void registerBehaviours() {
 		System.out.println("Agent : " 
 				+ getAID().getName()
@@ -45,6 +60,9 @@ public class LightAgent extends DefaultAgent {
 	    addBehaviour(new LightSensors(this, new LightInterActioner(_strAgrs[1])));
 	}
 
+	/**
+	 * Register description.
+	 */
 	private void registerDescription() {
 		System.out.println("Agent : " 
 				+ getAID().getName()
@@ -75,6 +93,9 @@ public class LightAgent extends DefaultAgent {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see jade.core.Agent#takeDown()
+	 */
 	@Override
 	protected void takeDown() {
 		

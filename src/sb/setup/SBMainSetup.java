@@ -1,19 +1,36 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.setup;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Class SBMainSetup.
+ */
 public class SBMainSetup {
 	
+	/** The _setups. */
 	private List<ISetup> _setups = new ArrayList<>();
+	
+	/** The exit. */
 	public boolean EXIT = false;
 	
+	/**
+	 * Instantiates a new SB main setup.
+	 */
 	public SBMainSetup(){
 		_setups.add(new MainContainer());
 		_setups.add(new Room001());
 	}
 	
+	/**
+	 * Prints the menu.
+	 */
 	public void printMenu(){
         
         System.out.println("Select one option :");        
@@ -39,6 +56,11 @@ public class SBMainSetup {
         }
 	}
 	
+	/**
+	 * Launch by index.
+	 *
+	 * @param index the index
+	 */
 	public void launchByIndex(int index){
 		if(_setups.size() > index){
 			System.out.println("CMD Launch : "+_setups.get(index).getName());
@@ -46,6 +68,11 @@ public class SBMainSetup {
 		}
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		SBMainSetup mainSetup = new SBMainSetup();
 		

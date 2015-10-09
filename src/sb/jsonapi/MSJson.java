@@ -1,3 +1,8 @@
+/*
+ * @author MATYSIAK Hervé
+ * @version 1.0
+ * Last Update : 2015/10/09
+ */
 package sb.jsonapi;
 
 import java.net.HttpURLConnection;
@@ -10,14 +15,19 @@ import java.nio.charset.Charset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * The Class MSJson.
+ */
 public class MSJson {
 	
+	/** The _service url. */
 	private static String _serviceURL = "http://localhost:8000/";
 	
 	/**
-	 * Get URL content in string
-	 * @param URL
-	 * @return
+	 * Get URL content in string.
+	 *
+	 * @param URL the url
+	 * @return the url content
 	 */
 	private static String getUrlContent(String URL){
 		StringBuilder sb = new StringBuilder();
@@ -49,9 +59,10 @@ public class MSJson {
 	}
 	
 	/**
-	 * Return a JSEquipement from name
-	 * @param Name
-	 * @return
+	 * Return a JSEquipement from name.
+	 *
+	 * @param Name the name
+	 * @return the equipment
 	 */
 	public static JSEquipement getEquipment(String Name){
 		String url = _serviceURL + "Get_Equipment/" + Name;
@@ -71,11 +82,11 @@ public class MSJson {
 	}
 	
 	/**
-	 * Update a Equipment with Name (identifier)
-	 * @param Name
-	 * @param bool If data is boolean or not
-	 * @param value
-	 * @return
+	 * Update a Equipment with Name (identifier).
+	 *
+	 * @param Name the name
+	 * @param value the value
+	 * @return true, if successful
 	 */
 	public static boolean updateEquipment(String Name, String value){
 		String url = _serviceURL + "Update_EquipmentState/" + Name + "/";
@@ -99,10 +110,11 @@ public class MSJson {
 	
 	/**
 	 * Add a equipment.
-	 * @param Name
-	 * @param type
-	 * @param value
-	 * @return
+	 *
+	 * @param Name the name
+	 * @param type the type
+	 * @param value the value
+	 * @return true, if successful
 	 */
 	public static boolean addEquipment(String Name, ENetType type, String value){
 		String url = _serviceURL + "Add_Equipement/" + Name + "/";
