@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Hervï¿½
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -92,22 +92,4 @@ public class HeatingAgent extends DefaultAgent {
 			e.printStackTrace();
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see jade.core.Agent#takeDown()
-	 */
-	@Override
-	protected void takeDown() {
-		
-		try {
-			DFService.deregister(this);
-		} catch (FIPAException  e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("Agent SHUTDOWN : " + getAID().getName());
-		
-		super.takeDown();
-	}
-
 }
