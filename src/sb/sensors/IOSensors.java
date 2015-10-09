@@ -26,6 +26,7 @@ public class IOSensors extends TickerBehaviour{
 			if (_ioActioner.getValue() != _ioState) {
 				_ioState = _ioActioner.getValue();
 				_defaultAgent.sendInform(ENetType.IO, String.valueOf(_ioState));
+				System.out.println("ShutterSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.IO);

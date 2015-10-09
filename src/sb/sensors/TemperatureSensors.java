@@ -28,6 +28,7 @@ public class TemperatureSensors extends TickerBehaviour {
 			if(_temperature.getValue() != _temperatureState){
 				_temperatureState = _temperature.getValue();
 				_defaultAgent.sendInform(ENetType.TEMPERATURE, String.valueOf(_temperatureState));
+				System.out.println("ShutterSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.TEMPERATURE);
