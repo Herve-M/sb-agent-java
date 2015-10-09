@@ -7,17 +7,9 @@ package sb.agents;
 
 import java.util.EnumSet;
 
-import jade.domain.DFService;
-import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
-import sb.actioners.IOActioner;
-import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.behaviours.EBehaviour;
-import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
-import sb.sensors.IOSensors;
 
 
 /**
