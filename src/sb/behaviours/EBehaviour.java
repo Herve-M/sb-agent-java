@@ -9,5 +9,6 @@ public enum EBehaviour {
 	LuminositySensors,
 	TemperatureSensors,
 	HumiditySensors,
-	HeatingSensors
+	HeatingSensors,
+	AirConditionerSensors
 }

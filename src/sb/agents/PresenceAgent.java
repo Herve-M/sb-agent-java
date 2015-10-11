@@ -16,9 +16,6 @@ import sb.helpers.ETypeHelper;
  * The Class PresenceAgent.
  */
 public class PresenceAgent extends DefaultAgent {
-	
-	/** The _str agrs. */
-	private String _strAgrs[] = new String[20];
 
 	/* (non-Javadoc)
 	 * @see jade.core.Agent#setup()
@@ -30,10 +27,11 @@ public class PresenceAgent extends DefaultAgent {
 		Object args[] = getArguments();
 		if(args != null && args.length > 0) {
 			for (int i = 0; i < args.length; i++) {
-				_strAgrs[i] = (String) args[i];
+				strAgrs[i] = (String) args[i];
 			}
 			
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE);
+			registerAgent();
 			
 			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.PresenceSensors);			
 			registerBehaviours(behaviours);

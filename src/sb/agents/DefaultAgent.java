@@ -26,10 +26,12 @@ import sb.behaviours.EBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.interactioners.AirConditionerInterActioner;
 import sb.interactioners.HeatingInterActioner;
 import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
+import sb.sensors.AirConditionerSensors;
 import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
 import sb.sensors.IOSensors;
@@ -46,13 +48,18 @@ import sb.sensors.TemperatureSensors;
 public class DefaultAgent extends Agent {
 	
 	/** The receivers. */
-	public List<AID> 	receivers = new ArrayList<>();	
+	public List<AID> 			receivers = new ArrayList<>();	
+	
+	/** Agent Service Description */
+	public DFAgentDescription 	agentDescription = new DFAgentDescription();
 	
 	/** The targeted object. */
-	public String 		targetedObject;
+	public String 				targetedObject;
 	
 	/** The _str agrs. */
-	public String 		strAgrs[] = new String[20];
+	public String 				strAgrs[] = new String[20];
+	
+	private int 				_serviceDescriptionCounter = 0;
 	
 	/**
 	 * Add a behaviour
@@ -97,6 +104,9 @@ public class DefaultAgent extends Agent {
 				case HeatingSensors:
 					addBehaviour(new HeatingSensors(this, new HeatingInterActioner(strAgrs[1])));
 					break;
+				case AirConditionerSensors:
+					addBehaviour(new AirConditionerSensors(this, new AirConditionerInterActioner(strAgrs[1])));
+					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");
 					break;
@@ -116,31 +126,34 @@ public class DefaultAgent extends Agent {
 	 * @param typeHelper
 	 * @return
 	 */
-	public boolean registerDescription(ECategoryHelper categoryHelper, ETypeHelper typeHelper){
+	public void registerDescription(ECategoryHelper categoryHelper, ETypeHelper typeHelper){
 		System.out.println("Agent : " 
 				+ getAID().getName()
 				+ "\n\t"
 				+ "Registration");
 		
-		DFAgentDescription ad = new DFAgentDescription();
-		ad.setName(getAID());
+		agentDescription.setName(getAID());
 		
 		ServiceDescription sd1 = new ServiceDescription();
 		sd1.setName("CLASS");
-		sd1.setOwnership(ad.getName().getName());
+		sd1.setOwnership(agentDescription.getName().getName());
 		sd1.setType(ClassificationHelper.getCategoryCode(categoryHelper, typeHelper));
 		
-		ad.addServices(sd1);
+		agentDescription.addServices(sd1);
 		
-		ServiceDescription sd2 = new ServiceDescription();
-		sd2.setName("ROOMID");
-		sd2.setOwnership(ad.getName().getName());
-		sd2.setType(strAgrs[0]);
-		
-		ad.addServices(sd2);
-		
+		if(_serviceDescriptionCounter < 1){
+			ServiceDescription sd2 = new ServiceDescription();
+			sd2.setName("ROOMID");
+			sd2.setOwnership(agentDescription.getName().getName());
+			sd2.setType(strAgrs[0]);
+			agentDescription.addServices(sd2);
+			_serviceDescriptionCounter += 1;
+		}			
+	}
+	
+	public boolean registerAgent() {
 		try {
-			DFService.register(this, ad);
+			DFService.register(this, agentDescription);
 		} catch (FIPAException ex) {
 			System.err.println("Errro at registerBehaviours "+ex.getMessage());
 			return false;
@@ -192,8 +205,7 @@ public class DefaultAgent extends Agent {
 			DFService.deregister(this);
 		} catch (FIPAException  e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		System.out.println("Agent SHUTDOWN : " + getAID().getName());
 	}
 }

@@ -17,9 +17,6 @@ import sb.helpers.ETypeHelper;
  */
 public class ShutterAgent extends DefaultAgent {
 
-	/** The _str agrs. */
-	private String _strAgrs[] = new String[20];
-
 	/* (non-Javadoc)
 	 * @see jade.core.Agent#setup()
 	 */
@@ -30,10 +27,11 @@ public class ShutterAgent extends DefaultAgent {
 		Object args[] = getArguments();
 		if(args != null && args.length > 0) {
 			for (int i = 0; i < args.length; i++) {
-				_strAgrs [i] = (String) args[i];
+				strAgrs [i] = (String) args[i];
 			}
 			
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.SHUTTER);
+			registerAgent();
 			
 			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.ShutterSensors);			
 			registerBehaviours(behaviours);

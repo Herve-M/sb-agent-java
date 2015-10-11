@@ -31,6 +31,7 @@ public class MasterAgent extends DefaultAgent {
 			}
 			
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.NONE);
+			registerAgent();
 			
 			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
