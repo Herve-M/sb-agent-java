@@ -39,6 +39,9 @@ public enum ETypeHelper {
 	HLT("HLT"),
 	
 	/** The none. */
+	AIRCONDITIONER("A"),
+	
+	/** The none. */
 	NONE("N");
 	
 	/**
