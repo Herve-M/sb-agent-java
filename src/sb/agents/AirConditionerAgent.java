@@ -1,7 +1,7 @@
-/*
+/**
  * @author MATYSIAK Herv�
  * @version 1.0
- * Last Update : 2015/10/09
+ * Last Apdate : 2015/10/09
  */
 package sb.agents;
 
@@ -11,12 +11,11 @@ import sb.behaviours.EBehaviour;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
-
 /**
- * The Class HLTAgent.
+ * 
  */
-public class HLTAgent extends DefaultAgent {
-
+public class AirConditionerAgent extends DefaultAgent {
+	
 	/* (non-Javadoc)
 	 * @see jade.core.Agent#setup()
 	 */
@@ -30,16 +29,14 @@ public class HLTAgent extends DefaultAgent {
 				strAgrs [i] = (String) args[i];
 			}
 			
-			registerDescription(ECategoryHelper.AGENT, ETypeHelper.LUMINOSITY);
-			registerDescription(ECategoryHelper.AGENT, ETypeHelper.TEMPERATURE);
-			registerDescription(ECategoryHelper.AGENT, ETypeHelper.HUMIDITY);
+			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.AIRCONDITIONER);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LuminositySensors, EBehaviour.TemperatureSensors, EBehaviour.HumiditySensors);
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AirConditionerSensors);			
 			registerBehaviours(behaviours);
 		}
 		else {
 			doDelete();
 		}
-	}	
+	}
 }
