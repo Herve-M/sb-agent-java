@@ -5,8 +5,6 @@ package sb.behaviours;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
-import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import sb.agents.DefaultAgent;
 
@@ -20,7 +18,7 @@ public class DefaultMessageReceiverBehaviour extends CyclicBehaviour {
 	/** The _default agent. */
 	private DefaultAgent 			_defaultAgent;
 	
-	/** The template of the researched message (REQUEST|"heating") */
+	/** The template of the researched message (REQUEST) */
 	protected MessageTemplate 		_template;
 	
 	/**
@@ -35,15 +33,7 @@ public class DefaultMessageReceiverBehaviour extends CyclicBehaviour {
 	 * @see jade.core.behaviours.Behaviour#action()
 	 */
 	@Override
-	public void action() {
-		ACLMessage receive = myAgent.receive();
-		
-		if (receive != null) {
-			
-		} else {
-			block();
-		}
-	}
+	public void action() {}
 	
 	/* (non-Javadoc)
 	 * @see jade.core.behaviours.Behaviour#onEnd()
