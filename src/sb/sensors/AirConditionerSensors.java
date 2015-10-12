@@ -12,7 +12,6 @@ import sb.interactioners.AirConditionerInterActioner;
 import sb.jsonapi.ENetType;
 
 /**
- * @author Psyko
  *
  */
 public class AirConditionerSensors extends TickerBehaviour {

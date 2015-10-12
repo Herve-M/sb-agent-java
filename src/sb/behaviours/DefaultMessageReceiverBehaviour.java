@@ -7,6 +7,7 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import sb.agents.DefaultAgent;
 
 /**
@@ -18,6 +19,9 @@ public class DefaultMessageReceiverBehaviour extends CyclicBehaviour {
 	
 	/** The _default agent. */
 	private DefaultAgent 			_defaultAgent;
+	
+	/** The template of the researched message (REQUEST|"heating") */
+	protected MessageTemplate 		_template;
 	
 	/**
 	 * 
