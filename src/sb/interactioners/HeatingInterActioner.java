@@ -20,7 +20,7 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	
 	/** The _state. */
 	private boolean _state;
-	
+
 	/** The _value. */
 	private int 	_value;
 
@@ -49,6 +49,13 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	public boolean getState() {
 		updateData();
 		return _state;
+	}
+	
+	/**
+	 * @param _state the _state to set
+	 */
+	public void setState(boolean state) {
+		this._state = state;
 	}
 
 	/* (non-Javadoc)
@@ -82,8 +89,8 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	private void updateData() {
 		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
-		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);
+		this._state = equipement != null && _value != 0 ? true : false;
 	}
 
 }

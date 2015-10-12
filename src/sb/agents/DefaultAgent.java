@@ -113,7 +113,7 @@ public class DefaultAgent extends Agent {
 				}
 			}
 		} catch(Exception ex){
-			System.err.println("Errro at registerBehaviours "+ex.getMessage());
+			System.err.println("Error at registerBehaviours "+ex.getMessage());
 			return false;
 		}
 		return true;
@@ -155,7 +155,7 @@ public class DefaultAgent extends Agent {
 		try {
 			DFService.register(this, agentDescription);
 		} catch (FIPAException ex) {
-			System.err.println("Errro at registerBehaviours "+ex.getMessage());
+			System.err.println("Error at registerBehaviours "+ex.getMessage());
 			return false;
 		}
 		return true;

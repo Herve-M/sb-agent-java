@@ -8,8 +8,7 @@ import sb.jsonapi.JSEquipement;
 import sb.jsonapi.MSJson;
 
 /**
- * 
- *
+ * The Class AirConditionerInterActioner.
  */
 public class AirConditionerInterActioner implements IActioner, IInterActioner {
 
@@ -63,6 +62,15 @@ public class AirConditionerInterActioner implements IActioner, IInterActioner {
 		return _state;
 	}
 
+	/**
+	 * Sets the state.
+	 *
+	 * @param state the new state
+	 */
+	public void setState(boolean state) {
+		this._state = state;
+	}
+
 	/* (non-Javadoc)
 	 * @see sb.actioners.IActioner#getValue()
 	 */
@@ -78,8 +86,8 @@ public class AirConditionerInterActioner implements IActioner, IInterActioner {
 	private void updateData() {
 		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
-		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);
+		this._state = equipement != null && _value != 0 ? true : false;
 	}
 
 }

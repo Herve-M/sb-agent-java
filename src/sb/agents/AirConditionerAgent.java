@@ -1,7 +1,7 @@
 /**
- * @author MATYSIAK Hervï¿½
+ * @author MATYSIAK Hervé
  * @version 1.0
- * Last Apdate : 2015/10/09
+ * Last Update : 2015/10/09
  */
 package sb.agents;
 

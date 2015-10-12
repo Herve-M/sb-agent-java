@@ -16,17 +16,17 @@ import sb.interactioners.HeatingInterActioner;
 public class HeatingEquipment extends jade.core.behaviours.OneShotBehaviour {
 
 	/** The value. */
-	private int value;
+	private int _value;
 	
 	/**
 	 * Instantiates a new heating equipment.
 	 *
-	 * @param a the a
-	 * @param value the value
+	 * @param a the selected agent
+	 * @param value the int value
 	 */
 	public HeatingEquipment(Agent a, int value) {
 		super(a);
-		this.value = value;
+		this._value = value;
 	}
 	
 	/* (non-Javadoc)
@@ -36,6 +36,6 @@ public class HeatingEquipment extends jade.core.behaviours.OneShotBehaviour {
 	public void action() {
 		DefaultAgent agent = (DefaultAgent) myAgent;
 		HeatingInterActioner hia = new HeatingInterActioner(agent.targetedObject);
-		hia.setValue(this.value);		
+		hia.setValue(this._value);
 	}
 }

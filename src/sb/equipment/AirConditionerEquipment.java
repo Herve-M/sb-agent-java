@@ -11,20 +11,22 @@ import sb.agents.DefaultAgent;
 import sb.interactioners.AirConditionerInterActioner;
 
 /**
- * 
- *
+ * The Class AirConditionerEquipment.
  */
 public class AirConditionerEquipment extends OneShotBehaviour{
 
 	/** The value. */
-	private int value;
+	private int _value;
 	
 	/**
-	 * 
+	 * Instantiates a new air conditioner equipment.
+	 *
+	 * @param a the selected agent
+	 * @param value the int value
 	 */
 	public AirConditionerEquipment(Agent a, int value) {
 		super(a);
-		this.value = value;
+		this._value = value;
 	}
 	
 	/* (non-Javadoc)
@@ -34,7 +36,7 @@ public class AirConditionerEquipment extends OneShotBehaviour{
 	public void action() {
 		DefaultAgent agent = (DefaultAgent) myAgent;
 		AirConditionerInterActioner hia = new AirConditionerInterActioner(agent.targetedObject);
-		hia.setValue(this.value);
+		hia.setValue(this._value);
 	}
 
 }

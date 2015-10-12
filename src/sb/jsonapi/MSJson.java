@@ -93,7 +93,7 @@ public class MSJson {
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
-		InputStreamReader in = null;
+
 		try {
 			URL uri = new URL(url);
 			httpConnection = (HttpURLConnection) uri.openConnection();
@@ -111,9 +111,9 @@ public class MSJson {
 	/**
 	 * Add a equipment.
 	 *
-	 * @param Name the name
-	 * @param type the type
-	 * @param value the value
+	 * @param Name the name of the Equipment
+	 * @param type the type of the Equipment
+	 * @param value the value of the Equipment
 	 * @return true, if successful
 	 */
 	public static boolean addEquipment(String Name, ENetType type, String value){
@@ -122,7 +122,45 @@ public class MSJson {
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
-		InputStreamReader in = null;
+
+		try {
+			URL uri = new URL(url);
+			httpConnection = (HttpURLConnection) uri.openConnection();
+			if (httpConnection != null)
+				httpConnection.setReadTimeout(60 * 1000);
+			if(httpConnection.getResponseCode() != 200)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while calling URL:"+ url, e);
+		}
+	}
+	
+	public static boolean increaseHeaterMode() {
+		String url = _serviceURL + "Increase_HeaterMode/";
+		
+		HttpURLConnection httpConnection = null;
+
+		try {
+			URL uri = new URL(url);
+			httpConnection = (HttpURLConnection) uri.openConnection();
+			if (httpConnection != null)
+				httpConnection.setReadTimeout(60 * 1000);
+			if(httpConnection.getResponseCode() != 200)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while calling URL:"+ url, e);
+		}
+	}
+	
+	public static boolean decreaseHeaterMode() {
+		String url = _serviceURL + "Decrease_HeaterMode/";
+		
+		HttpURLConnection httpConnection = null;
+
 		try {
 			URL uri = new URL(url);
 			httpConnection = (HttpURLConnection) uri.openConnection();
