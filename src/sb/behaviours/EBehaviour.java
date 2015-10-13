@@ -10,5 +10,7 @@ public enum EBehaviour {
 	TemperatureSensors,
 	HumiditySensors,
 	HeatingSensors,
-	AirConditionerSensors
+	AirConditionerSensors,
+	NullBehaviour,
+	HeatingMSGResponder
 }

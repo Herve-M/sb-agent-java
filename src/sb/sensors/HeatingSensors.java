@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK HervÃ©
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -13,6 +13,7 @@ import sb.jsonapi.ENetType;
 
 /**
  * The Class HeatingSensors.
+ * Return a msg every X secs if value of Sensors change.
  */
 @SuppressWarnings("serial")
 public class HeatingSensors extends TickerBehaviour {

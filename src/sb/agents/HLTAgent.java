@@ -35,7 +35,7 @@ public class HLTAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.HUMIDITY);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LuminositySensors, EBehaviour.TemperatureSensors, EBehaviour.HumiditySensors);
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LuminositySensors, EBehaviour.TemperatureSensors, EBehaviour.HumiditySensors, EBehaviour.AgentDiscovery);
 			registerBehaviours(behaviours);
 		}
 		else {

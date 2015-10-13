@@ -33,7 +33,7 @@ public class IOAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.IO);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.IOSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.IOSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

@@ -32,6 +32,8 @@ import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
 import sb.sensors.AirConditionerSensors;
+import sb.sensors.HeatingMSGResponder;
+import sb.sensors.HeatingMSGSender;
 import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
 import sb.sensors.IOSensors;
@@ -82,12 +84,14 @@ public class DefaultAgent extends Agent {
 					break;
 				case ShutterSensors:
 					addBehaviour(new ShutterSensors(this, new ShutterInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case PresenceSensors:
 					addBehaviour(new PresenceSensors(this, new PresenceActioner(strAgrs[1])));
 					break;
 				case LightSensors:
 					addBehaviour(new LightSensors(this, new LightInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case IOSensors:
 					addBehaviour(new IOSensors(this, new IOActioner(strAgrs[1])));
@@ -103,9 +107,14 @@ public class DefaultAgent extends Agent {
 					break;
 				case HeatingSensors:
 					addBehaviour(new HeatingSensors(this, new HeatingInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case AirConditionerSensors:
 					addBehaviour(new AirConditionerSensors(this, new AirConditionerInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
+					break;
+				case HeatingMSGResponder:
+					addBehaviour(new HeatingMSGResponder(this));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

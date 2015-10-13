@@ -33,7 +33,7 @@ public class LightAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.LIGHT);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LightSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LightSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

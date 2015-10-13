@@ -32,7 +32,7 @@ public class AirConditionerAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.AIRCONDITIONER);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AirConditionerSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AirConditionerSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

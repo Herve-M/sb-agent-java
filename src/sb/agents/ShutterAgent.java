@@ -33,7 +33,7 @@ public class ShutterAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.SHUTTER);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.ShutterSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.ShutterSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

@@ -4,10 +4,12 @@ import jade.core.Agent;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import sb.equipment.AirConditionerEquipment;
+import sb.equipment.EAction;
 import sb.equipment.HeatingEquipment;
 import sb.interactioners.AirConditionerInterActioner;
 import sb.interactioners.HeatingInterActioner;
 import sb.sensors.AirConditionerSensors;
+import sb.sensors.HeatingMSGSender;
 import sb.sensors.HeatingSensors;
 
 class HeatingMSGReceiver extends OneShotBehaviour {
@@ -55,9 +57,12 @@ class EndFSMBehavior extends OneShotBehaviour {
 	}
 };
 
-
-
-
+/**
+ * Temperature FSM Behavior
+ * Use MSG to Get and Set data.
+ * @author Hervé
+ *
+ */
 public class TemperatureBehaviour extends FSMBehaviour {
 	
 	private static final String STBEGIN = "S-TEMP-GET-0";
@@ -84,31 +89,31 @@ public class TemperatureBehaviour extends FSMBehaviour {
 	private static final String ST21 = "S-HTP1-SET-21";
 	private static final String ST22 = "S-HTON-SET-22";
 	
-	public TemperatureBehaviour(Agent a){
+	public TemperatureBehaviour(Agent a, int roomId){
 		this.registerFirstState(new TemperatureMSGReceiver() , STBEGIN); // 0
 		this.registerLastState(new EndFSMBehavior(), STEND); // 4
 		this.registerState(new SMASetting(), ST1); // 1
 		
-		this.registerState(new HeatingMSGReceiver(), ST2);
-		this.registerState(new HeatingEquipment(myAgent, 1), ST3);
-		this.registerState(new AirConditionerEquipment(myAgent, 1), ST5);
-		this.registerState(new HeatingMSGReceiver(), ST6);
-		this.registerState(new TemperatureMSGReceiver(), ST7);
-		this.registerState(new HeatingEquipment(myAgent, 1), ST8);
-		this.registerState(new HeatingEquipment(myAgent, 0), ST9);
-		this.registerState(new TemperatureMSGReceiver(), ST10);
-		this.registerState(new AirConditionerEquipment(myAgent, 1), ST11);
+		this.registerState(new HeatingMSGReceiver(), ST2); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST3); //SET
+		this.registerState(new AirConditionerEquipment(myAgent, 1), ST5); //TODO
+		this.registerState(new HeatingMSGReceiver(), ST6); //TODO
+		this.registerState(new TemperatureMSGReceiver(), ST7); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
+		this.registerState(new HeatingEquipment(myAgent, 0), ST9); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST10);  //SET
+		this.registerState(new AirConditionerEquipment(myAgent, 1), ST11); //TODO
 		this.registerState(new NullBehaviour() , ST12);
 		this.registerState(new NullBehaviour(), ST13);
-		this.registerState(new HeatingSensors(myAgent, new HeatingInterActioner("")), ST14);
-		this.registerState(new HeatingEquipment(myAgent, 0), ST15);
-		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST16);
-		this.registerState(new AirConditionerEquipment(myAgent, 0), ST17);
-		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST18);
-		this.registerState(new AirConditionerEquipment(myAgent, 0), ST19);
-		this.registerState(new SMASetting(), ST20);
-		this.registerState(new HeatingEquipment(myAgent, 1), ST21);
-		this.registerState(new HeatingEquipment(myAgent, 2), ST22);
+		this.registerState(new HeatingSensors(myAgent, new HeatingInterActioner("")), ST14); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST15);  //SET
+		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST16); //TODO
+		this.registerState(new AirConditionerEquipment(myAgent, 0), ST17); //TODO 
+		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST18); //TODO
+		this.registerState(new AirConditionerEquipment(myAgent, 0), ST19); //TODO
+		this.registerState(new SMASetting(), ST20); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST21); //SET
+		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST22); //SET
 		
 		{ //T>max
 			//TEMP
