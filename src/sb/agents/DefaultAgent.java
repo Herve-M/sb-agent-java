@@ -32,7 +32,7 @@ import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
 import sb.sensors.AirConditionerSensors;
-import sb.sensors.AirConditionnerMSGResponder;
+import sb.sensors.AirConditionerMSGResponder;
 import sb.sensors.HeatingMSGResponder;
 import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
@@ -117,7 +117,7 @@ public class DefaultAgent extends Agent {
 					addBehaviour(new HeatingMSGResponder(this));
 					break;
 				case AirConditionnerMSGResponder:
-					addBehaviour(new AirConditionnerMSGResponder(this));
+					addBehaviour(new AirConditionerMSGResponder(this));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

@@ -14,7 +14,7 @@ import sb.equipment.AirConditionerEquipment;
 import sb.helpers.EAction;
 import sb.interactioners.AirConditionerInterActioner;
 
-public class AirConditionnerMSGResponder extends OneShotBehaviour {
+public class AirConditionerMSGResponder extends OneShotBehaviour {
 	
 	/** Message template for filtering entering msg */
 	private MessageTemplate 		_template;
@@ -22,7 +22,7 @@ public class AirConditionnerMSGResponder extends OneShotBehaviour {
 	/** The _default agent. */
 	private DefaultAgent 			_defaultAgent;
 	
-	public AirConditionnerMSGResponder(Agent a) {
+	public AirConditionerMSGResponder(Agent a) {
 		super(a);
 		_defaultAgent = (DefaultAgent) myAgent;
 		System.out.println(_defaultAgent.targetedObject);
