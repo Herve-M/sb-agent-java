@@ -15,7 +15,6 @@ public class FSMTemperatureGetter extends OneShotBehaviour {
 	@Override
 	public void action() {
 		_temperature = MSJson.getTemperatureByRoom(_temperature.Id);
-		
 	}
 	
 	@Override

@@ -15,8 +15,8 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
-import sb.equipment.EAction;
 import sb.helpers.ClassificationHelper;
+import sb.helpers.EAction;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 

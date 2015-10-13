@@ -11,7 +11,7 @@ import jade.lang.acl.MessageTemplate;
 import jade.proto.AchieveREResponder;
 import sb.agents.DefaultAgent;
 import sb.equipment.AirConditionerEquipment;
-import sb.equipment.EAction;
+import sb.helpers.EAction;
 import sb.interactioners.AirConditionerInterActioner;
 
 public class AirConditionnerMSGResponder extends OneShotBehaviour {

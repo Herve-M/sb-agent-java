@@ -1,4 +1,4 @@
-package sb.behaviours;
+package sb.behaviours.fsm;
 
 import jade.core.behaviours.OneShotBehaviour;
 

@@ -1,4 +1,4 @@
-package sb.equipment;
+package sb.helpers;
 
 public enum EAction {
 	ON,
