@@ -3,6 +3,8 @@ package sb.behaviours;
 import jade.core.Agent;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
+import sb.behaviours.fsm.FSMSMAStateGetter;
+import sb.behaviours.fsm.FSMTemperatureGetter;
 import sb.equipment.AirConditionerEquipment;
 import sb.equipment.EAction;
 import sb.equipment.HeatingEquipment;
@@ -23,24 +25,6 @@ class HeatingMSGReceiver extends OneShotBehaviour {
 };
 
 class AirConditionMSGReceiver extends OneShotBehaviour {
-
-	@Override
-	public void action() {
-		// TODO Auto-generated method stub
-		
-	}
-};
-
-class TemperatureMSGReceiver extends OneShotBehaviour {
-
-	@Override
-	public void action() {
-		// TODO Auto-generated method stub
-		
-	}
-};
-
-class SMASetting extends OneShotBehaviour {
 
 	@Override
 	public void action() {
@@ -91,18 +75,18 @@ public class TemperatureBehaviour extends FSMBehaviour {
 	private static final String ST22 = "S-HTON-SET-22";
 	
 	public TemperatureBehaviour(Agent a, int roomId){
-		this.registerFirstState(new TemperatureMSGReceiver() , STBEGIN); // 0
+		this.registerFirstState(new FSMTemperatureGetter(roomId) , STBEGIN); // 0
 		this.registerLastState(new EndFSMBehavior(), STEND); // 4
-		this.registerState(new SMASetting(), ST1); // 1
+		this.registerState(new FSMSMAStateGetter(roomId), ST1); // 1
 		
 		this.registerState(new HeatingMSGReceiver(), ST2); //TODO
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST3); //SET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST5); //SET
 		this.registerState(new HeatingMSGReceiver(), ST6); //TODO
-		this.registerState(new TemperatureMSGReceiver(), ST7); //TODO
+		this.registerState(new FSMTemperatureGetter(roomId), ST7); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST9); //SET
-		this.registerState(new TemperatureMSGReceiver(), ST10);  //TODO
+		this.registerState(new FSMTemperatureGetter(roomId), ST10);  //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST11); //TODO
 		this.registerState(new NullBehaviour() , ST12);
 		this.registerState(new NullBehaviour(), ST13);
@@ -112,7 +96,7 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST17); //SET
 		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST18); //TODO
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST19); //SET
-		this.registerState(new SMASetting(), ST20); //TODO
+		this.registerState(new FSMSMAStateGetter(roomId), ST20); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST21); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST22); //SET
 		

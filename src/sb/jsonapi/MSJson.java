@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Hervï¿½
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -135,5 +135,49 @@ public class MSJson {
 		} catch (Exception e) {
 			throw new RuntimeException("Exception while calling URL:"+ url, e);
 		}
+	}
+	
+	/**
+	 * Get Temperature datas from a specified room.
+	 * @param roomId
+	 * @return
+	 */
+	public static JSTemperature getTemperatureByRoom(int roomId){
+		String url = _serviceURL + "Get_Temperatures/" + roomId;
+		String json = getUrlContent(url);
+		
+		JSTemperature jsTemperature = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			jsTemperature =  mapper.readValue(json, JSTemperature.class);
+		} catch (IOException e)
+		{
+		   e.printStackTrace();
+		}
+		
+		return jsTemperature;
+	}
+	
+	/**
+	 * Get SMA State : Auto or Manual
+	 * @param roomId
+	 * @return
+	 */
+	public static JSSMAState getSMAStateByRoom(int roomId){
+		String url = _serviceURL + "Get_Temperatures/" + roomId;
+		String json = getUrlContent(url);
+		
+		JSSMAState jsSMAState = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			jsSMAState =  mapper.readValue(json, JSSMAState.class);
+		} catch (IOException e)
+		{
+		   e.printStackTrace();
+		}
+		
+		return jsSMAState;
 	}
 }
