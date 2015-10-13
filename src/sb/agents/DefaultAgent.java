@@ -1,7 +1,7 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Hervé
  * @version 1.0
- * Last Update : 2015/10/09
+ * Last Update : 2015/10/13
  */
 package sb.agents;
 
@@ -32,8 +32,8 @@ import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
 import sb.sensors.AirConditionerSensors;
+import sb.sensors.AirConditionnerMSGResponder;
 import sb.sensors.HeatingMSGResponder;
-import sb.sensors.HeatingMSGSender;
 import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
 import sb.sensors.IOSensors;
@@ -115,6 +115,9 @@ public class DefaultAgent extends Agent {
 					break;
 				case HeatingMSGResponder:
 					addBehaviour(new HeatingMSGResponder(this));
+					break;
+				case AirConditionnerMSGResponder:
+					addBehaviour(new AirConditionnerMSGResponder(this));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

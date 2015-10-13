@@ -8,6 +8,7 @@ import sb.equipment.EAction;
 import sb.equipment.HeatingEquipment;
 import sb.interactioners.AirConditionerInterActioner;
 import sb.interactioners.HeatingInterActioner;
+import sb.sensors.AirConditionerMSGSender;
 import sb.sensors.AirConditionerSensors;
 import sb.sensors.HeatingMSGSender;
 import sb.sensors.HeatingSensors;
@@ -52,7 +53,7 @@ class EndFSMBehavior extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
+		System.out.println("!!!! One clycle done !!!!");
 		
 	}
 };
@@ -96,21 +97,21 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		
 		this.registerState(new HeatingMSGReceiver(), ST2); //TODO
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST3); //SET
-		this.registerState(new AirConditionerEquipment(myAgent, 1), ST5); //TODO
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST5); //SET
 		this.registerState(new HeatingMSGReceiver(), ST6); //TODO
 		this.registerState(new TemperatureMSGReceiver(), ST7); //TODO
 		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
-		this.registerState(new HeatingEquipment(myAgent, 0), ST9); //TODO
-		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST10);  //SET
-		this.registerState(new AirConditionerEquipment(myAgent, 1), ST11); //TODO
+		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST9); //SET
+		this.registerState(new TemperatureMSGReceiver(), ST10);  //TODO
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST11); //TODO
 		this.registerState(new NullBehaviour() , ST12);
 		this.registerState(new NullBehaviour(), ST13);
 		this.registerState(new HeatingSensors(myAgent, new HeatingInterActioner("")), ST14); //TODO
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST15);  //SET
 		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST16); //TODO
-		this.registerState(new AirConditionerEquipment(myAgent, 0), ST17); //TODO 
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST17); //SET
 		this.registerState(new AirConditionerSensors(myAgent, new AirConditionerInterActioner("")), ST18); //TODO
-		this.registerState(new AirConditionerEquipment(myAgent, 0), ST19); //TODO
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST19); //SET
 		this.registerState(new SMASetting(), ST20); //TODO
 		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST21); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST22); //SET

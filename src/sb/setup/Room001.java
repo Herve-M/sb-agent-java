@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Hervï¿½
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -87,6 +87,12 @@ public class Room001 implements ISetup {
 					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 4)}));
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5),
 					"sb.agents.IOAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.SENSOR, ETypeHelper.IO, 5)}));
+			
+			//TODO : verify name from database
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1),
+					"sb.agents.HeatingAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1),
+					"sb.agents.AirConditionerAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)}));
 			
 			//Master
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getCategoryCode(ECategoryHelper.AGENT, ETypeHelper.NONE),

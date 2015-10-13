@@ -10,19 +10,11 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.AchieveREResponder;
 import sb.agents.DefaultAgent;
+import sb.equipment.AirConditionerEquipment;
 import sb.equipment.EAction;
-import sb.equipment.HeatingEquipment;
-import sb.interactioners.HeatingInterActioner;
+import sb.interactioners.AirConditionerInterActioner;
 
-/**
- * FIPA RE Responser || Can be only added to ListenerAgent
- * Respond to REQUEST :
- * > ON / OFF
- * > P1 / M1
- * @author Hervé
- *
- */
-public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register the behaviour to Agent
+public class AirConditionnerMSGResponder extends OneShotBehaviour {
 	
 	/** Message template for filtering entering msg */
 	private MessageTemplate 		_template;
@@ -30,28 +22,29 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 	/** The _default agent. */
 	private DefaultAgent 			_defaultAgent;
 	
-	public HeatingMSGResponder(Agent a) {
+	public AirConditionnerMSGResponder(Agent a) {
 		super(a);
 		_defaultAgent = (DefaultAgent) myAgent;
+		System.out.println(_defaultAgent.targetedObject);
 		_template = MessageTemplate.and(
 		  		MessageTemplate.MatchProtocol(FIPANames.InteractionProtocol.FIPA_REQUEST),
 		  		MessageTemplate.MatchPerformative(ACLMessage.REQUEST) );
 	}
-
+	
 	@Override
 	public void action() {
 		myAgent.addBehaviour(new AchieveREResponder(myAgent, _template){
-			private HeatingInterActioner	_heating = new HeatingInterActioner(_defaultAgent.targetedObject);
-			private EAction					_action;
-			private int 					_oldValue;
-			private boolean 				_oldState;
+			private AirConditionerInterActioner	_airConditioner = new AirConditionerInterActioner(_defaultAgent.targetedObject);
+			private EAction						_action;
+			private int 						_oldValue;
+			private boolean 					_oldState;
 			
 			@Override
 			protected ACLMessage handleRequest(ACLMessage request) throws NotUnderstoodException, RefuseException {
 				String msgContent = request.getContent();
 				_action = EAction.valueOf(msgContent);
 								
-				if(_heating.getState() == false){
+				if(_airConditioner.getState() == false){
 					if(_action != EAction.ON) {
 						throw new RefuseException("Tried to action on halted equipment");
 					}
@@ -59,23 +52,23 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				
 				switch (_action) {
 				case ON:{
-					_oldState = _heating.getState();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, 1));
+					_oldState = _airConditioner.getState();
+					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, 1));
 					break;
 				}			
 				case OFF:{
-					_oldState = _heating.getState();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, 0));
+					_oldState = _airConditioner.getState();
+					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, 0));
 					break;
 				}	
 				case P1:{
-					_oldValue = _heating.getValue();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue+1));
+					_oldValue = _airConditioner.getValue();
+					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue+1));
 					break;
 				}
 				case M1:{
-					_oldValue = _heating.getValue();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
+					_oldValue = _airConditioner.getValue();
+					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
 					break;
 				}
 				default:
@@ -93,22 +86,22 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				
 				switch (_action) {
 				case ON:{
-					if(_oldState == _heating.getState())
+					if(_oldState == _airConditioner.getState())
 						throw new FailureException("Heater doesn't start !!");
 					break;
 				}			
 				case OFF:{
-					if(_oldState == _heating.getState())
+					if(_oldState == _airConditioner.getState())
 						throw new FailureException("Heater doesn't stop !!");
 					break;
 				}	
 				case P1:{
-					if(_oldValue == _heating.getValue())
+					if(_oldValue == _airConditioner.getValue())
 						throw new FailureException("Heater can't be increased !!");
 					break;
 				}
 				case M1:{
-					if(_oldValue == _heating.getValue())
+					if(_oldValue == _airConditioner.getValue())
 						throw new FailureException("Heater can't be decreased !!");
 					break;
 				}
