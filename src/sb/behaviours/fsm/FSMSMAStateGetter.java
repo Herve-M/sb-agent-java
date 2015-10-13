@@ -18,7 +18,9 @@ public class FSMSMAStateGetter extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd() {
-		if(_smaState.Manual)
+		boolean state = _smaState.Manual;
+		System.out.println("FSM : SMA State is "+state);
+		if(state)
 			return 0;
 		else
 			return 1;

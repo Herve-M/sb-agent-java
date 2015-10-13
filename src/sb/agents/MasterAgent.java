@@ -10,6 +10,7 @@ import java.util.EnumSet;
 import jade.core.behaviours.TickerBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 import sb.behaviours.EBehaviour;
+import sb.behaviours.TemperatureBehaviour;
 import sb.behaviours.fsm.FSMTemperatureGetter;
 import sb.helpers.EAction;
 import sb.helpers.ECategoryHelper;
@@ -40,6 +41,8 @@ public class MasterAgent extends DefaultAgent {
 			
 //			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AgentDiscovery);			
 //			registerBehaviours(behaviours);
+			
+			addBehaviour(new TemperatureBehaviour(this, 1));
 		}
 		else {
 			doDelete();

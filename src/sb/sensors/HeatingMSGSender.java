@@ -48,7 +48,12 @@ public class HeatingMSGSender extends OneShotBehaviour {
 		researchTemplate.addServices(agentDescription);
 		researchTemplate.addServices(roomDescription);
 		
-		try {			
+		try {
+			if(myAgent == null)
+				System.out.println("Agent null");
+			if(researchTemplate == null)
+				System.out.println("researchTemplate null");
+				
 			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate); 
 			if(result != null){
 				for (DFAgentDescription dfAgentDescription : result) {
