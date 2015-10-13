@@ -1,21 +1,15 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Hervé
  * @version 1.0
- * Last Update : 2015/10/09
+ * Last Update : 2015/10/13
  */
 package sb.agents;
 
 import java.util.EnumSet;
 
-import jade.core.behaviours.TickerBehaviour;
-import jade.core.behaviours.WakerBehaviour;
 import sb.behaviours.EBehaviour;
-import sb.behaviours.TemperatureBehaviour;
-import sb.behaviours.fsm.FSMTemperatureGetter;
-import sb.helpers.EAction;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
-import sb.sensors.HeatingMSGSender;
 
 
 /**
@@ -39,10 +33,8 @@ public class MasterAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.NONE);
 			registerAgent();
 			
-//			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AgentDiscovery);			
-//			registerBehaviours(behaviours);
-			
-			addBehaviour(new TemperatureBehaviour(this, 1));
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.TemperatureBehaviour);			
+			registerBehaviours(behaviours);
 		}
 		else {
 			doDelete();

@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -29,8 +29,7 @@ public class PresenceActioner implements IActioner {
 	 * @param Name the name
 	 */
 	public PresenceActioner(String Name) {
-		_name = Name;	
-		updateData();
+		_name = Name;
 	}
 	
 	/**

@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -27,8 +27,7 @@ public class JSEquipement {
 	@JsonProperty("Name")
 	public String name;
 
-/** The updated. */
-//	private JSType type;
+	/** The updated. */
 	@JsonProperty("Updated")
 	public String updated;
 	

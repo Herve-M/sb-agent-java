@@ -44,13 +44,11 @@ public class AirConditionerMSGSender extends OneShotBehaviour {
 		researchTemplate.addServices(roomDescription);
 		
 		try {			
-			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate); 
-			if(result != null){
-				for (DFAgentDescription dfAgentDescription : result) {
-						_receivers.add(dfAgentDescription.getName());
-				}
-			} else {
-				_receivers.clear();
+			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate);
+			if(result.length == 0)
+				System.err.println("AC-MSG-SENDER Err : no agent found");
+			for (DFAgentDescription dfAgentDescription : result) {
+					_receivers.add(dfAgentDescription.getName());
 			}			
 		}
 		catch (FIPAException fe) {
@@ -61,13 +59,14 @@ public class AirConditionerMSGSender extends OneShotBehaviour {
 	/**
 	 * Gestion des erreurs
 	 */
+	@SuppressWarnings("serial")
 	@Override
 	public void action() {
 		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
 		for (AID agent : _receivers) {
 			msg.addReceiver(agent);
 		}
-        msg.setReplyByDate(new Date(System.currentTimeMillis() + 5000)); //Max reply in 5 secs
+        msg.setReplyByDate(new Date(System.currentTimeMillis() + 10000)); //Max reply in 5 secs
 		msg.setLanguage("English");
 		//msg.setOntology(ENetType.HEATING+"-REQUEST"); //No need use protocol instead
 		msg.setProtocol(FIPANames.InteractionProtocol.FIPA_REQUEST);

@@ -2,9 +2,13 @@ package sb.behaviours.fsm;
 
 import jade.core.behaviours.OneShotBehaviour;
 import sb.interactioners.AirConditionerInterActioner;
-import sb.jsonapi.JSSMAState;
-import sb.jsonapi.MSJson;
 
+/**
+ * FSM State Behavior used to get the running state of an AirConditioner 
+ * equipment. 
+ * @author Hervé
+ *
+ */
 public class FSMAirConditionerGetter extends OneShotBehaviour {
 	private AirConditionerInterActioner 	_airConditioner;
 	private String 							_name;
@@ -21,7 +25,7 @@ public class FSMAirConditionerGetter extends OneShotBehaviour {
 	@Override
 	public int onEnd() {
 		boolean state = _airConditioner.getState();
-		System.out.println("FSM : AC is "+state);
+		System.out.println("FSM : AC ("+_airConditioner.getName()+") is "+state);
 		if(state)
 			return 1;
 		else

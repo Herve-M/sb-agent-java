@@ -8,25 +8,18 @@ import sb.behaviours.fsm.FSMHeatingGetter;
 import sb.behaviours.fsm.FSMSMAStateGetter;
 import sb.behaviours.fsm.FSMTemperatureGetter;
 import sb.behaviours.fsm.NullBehaviour;
-import sb.equipment.AirConditionerEquipment;
-import sb.equipment.HeatingEquipment;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.EAction;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
-import sb.interactioners.AirConditionerInterActioner;
-import sb.interactioners.HeatingInterActioner;
 import sb.sensors.AirConditionerMSGSender;
-import sb.sensors.AirConditionerSensors;
 import sb.sensors.HeatingMSGSender;
-import sb.sensors.HeatingSensors;
 
 class EndFSMBehavior extends OneShotBehaviour {
 
 	@Override
 	public void action() {
 		System.out.println("!!!! One clycle done !!!!");
-		
 	}
 };
 
@@ -51,16 +44,15 @@ public class TemperatureBehaviour extends FSMBehaviour {
 	private static final String ST10 = "S-TEMP-GET-10";
 	private static final String ST11 = "S-ACON-SET-11";
 	private static final String ST12 = "S-NULL-12";
-	private static final String ST13 = "S-EPS-13";
-	private static final String ST14 = "S-HT-GET-14";
-	private static final String ST15 = "S-HTOFF-SET-15";
-	private static final String ST16 = "S-AC-GET-16";
-	private static final String ST17 = "S-ACOFF-SET-17";
-	private static final String ST18 = "S-AC-GET-18";
-	private static final String ST19 = "S-ACOFF-SET-19";
-	private static final String ST20 = "S-SMA-GET-20";
-	private static final String ST21 = "S-HTP1-SET-21";
-	private static final String ST22 = "S-HTON-SET-22";
+	private static final String ST13 = "S-HT-GET-13";
+	private static final String ST14 = "S-HTOFF-SET-14";
+	private static final String ST15 = "S-AC-GET-15";
+	private static final String ST16 = "S-ACOFF-SET-16";
+	private static final String ST17 = "S-AC-GET-17";
+	private static final String ST18 = "S-ACOFF-SET-18";
+	private static final String ST19 = "S-SMA-GET-19";
+	private static final String ST20 = "S-HTP1-SET-20";
+	private static final String ST21 = "S-HTON-SET-21";
 	
 	public TemperatureBehaviour(Agent a, int roomId){
 		super(a);
@@ -78,16 +70,17 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new FSMTemperatureGetter(roomId), ST10);  //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST11); //SET
 		this.registerState(new NullBehaviour() , ST12); //TO test
-		this.registerState(new NullBehaviour(), ST13);
-		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST14); //GET
-		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST15);  //SET
-		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST16); //GET
-		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST17); //SET
-		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST18); //GET
-		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST19); //SET
-		this.registerState(new FSMSMAStateGetter(roomId), ST20); //GET
-		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST21); //SET
-		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST22); //SET
+		
+		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)) , ST13);
+		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST14);  //SET
+		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST15); //GET
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST16); //SET
+		
+		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST17); //GET
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST18); //SET
+		this.registerState(new FSMSMAStateGetter(roomId), ST19); //GET
+		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST20); //SET
+		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST21); //SET
 		
 		{ //T>max
 			//TEMP
@@ -128,35 +121,28 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		} // End Tmax
 		
 		{ // T[]
-			this.registerDefaultTransition(ST13, ST14);
-			this.registerDefaultTransition(ST13, ST16);
+			this.registerTransition(ST13, ST14,1);
+			this.registerTransition(ST13, ST15,0);
+			this.registerDefaultTransition(ST14, ST15);
 			
-			//HT
-			this.registerTransition(ST14, ST15, 1); //On
-			this.registerTransition(ST14, STEND, 0); //Off
-			
-			//AC
-			this.registerTransition(ST16, ST17, 1); //On
-			this.registerTransition(ST16, STEND, 0); //Off
-			
-			//End
-			this.registerDefaultTransition(ST15, STEND);
-			this.registerDefaultTransition(ST17, STEND);
+			this.registerTransition(ST15, ST16, 1);
+			this.registerTransition(ST15, STEND, 0);
+			this.registerDefaultTransition(ST16, STEND);
 		} // End T[]
 		
 		{ // T<min
 			//AC
-			this.registerTransition(ST18, ST19, 1); //On
-			this.registerTransition(ST18, ST20, 0); //Off	
+			this.registerTransition(ST17, ST18, 1); //On
+			this.registerTransition(ST17, ST19, 0); //Off	
 			
 			//MOD
-			this.registerTransition(ST20, ST22, 0); //Manual
-			this.registerTransition(ST20, ST21, 1); //Automatic
+			this.registerTransition(ST19, ST21, 0); //Manual
+			this.registerTransition(ST19, ST20, 1); //Automatic
 			
 			//End
-			this.registerDefaultTransition(ST19, STEND);
-			this.registerDefaultTransition(ST22, STEND);
+			this.registerDefaultTransition(ST18, STEND);
 			this.registerDefaultTransition(ST21, STEND);
+			this.registerDefaultTransition(ST20, STEND);
 		} // End T<min
 		
 	}

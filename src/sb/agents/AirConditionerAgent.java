@@ -1,5 +1,5 @@
 /**
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Apdate : 2015/10/09
  */
@@ -30,7 +30,7 @@ public class AirConditionerAgent extends DefaultAgent {
 			}
 			
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.AIRCONDITIONER);
-			registerDescription(ECategoryHelper.ACTIONER, ETypeHelper.HEATING);
+			registerDescription(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER);
 			registerAgent();
 			
 			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AirConditionerSensors, EBehaviour.AgentDiscovery, EBehaviour.AirConditionnerMSGResponder);			

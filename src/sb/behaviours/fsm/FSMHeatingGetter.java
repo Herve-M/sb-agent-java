@@ -2,9 +2,13 @@ package sb.behaviours.fsm;
 
 import jade.core.behaviours.OneShotBehaviour;
 import sb.interactioners.HeatingInterActioner;
-import sb.jsonapi.JSSMAState;
-import sb.jsonapi.MSJson;
 
+/**
+ * FSM State Behavior used to get the running state of an Heating 
+ * equipment.
+ * @author Hervé
+ *
+ */
 public class FSMHeatingGetter extends OneShotBehaviour {
 	private HeatingInterActioner 	_heating;
 	private String 					_name;
@@ -21,7 +25,7 @@ public class FSMHeatingGetter extends OneShotBehaviour {
 	@Override
 	public int onEnd() {
 		boolean state = _heating.getState();
-		System.out.println("FSM : Heating is "+state);
+		System.out.println("FSM : Heating ("+_heating.getName()+") is "+state);
 		if(state)
 			return 1;
 		else

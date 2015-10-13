@@ -4,6 +4,12 @@ import jade.core.behaviours.OneShotBehaviour;
 import sb.jsonapi.JSSMAState;
 import sb.jsonapi.MSJson;
 
+/**
+ * FSM State Behavior used to get the SMA state
+ * Manual or Auto
+ * @author Hervé
+ *
+ */
 public class FSMSMAStateGetter extends OneShotBehaviour {
 	private JSSMAState _smaState;
 	

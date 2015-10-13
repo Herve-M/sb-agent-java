@@ -48,19 +48,12 @@ public class HeatingMSGSender extends OneShotBehaviour {
 		researchTemplate.addServices(agentDescription);
 		researchTemplate.addServices(roomDescription);
 		
-		try {
-			if(myAgent == null)
-				System.out.println("Agent null");
-			if(researchTemplate == null)
-				System.out.println("researchTemplate null");
-				
-			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate); 
-			if(result != null){
-				for (DFAgentDescription dfAgentDescription : result) {
-						_receivers.add(dfAgentDescription.getName());
-				}
-			} else {
-				_receivers.clear();
+		try {			
+			DFAgentDescription[] result = DFService.search(myAgent, researchTemplate);
+			if(result.length == 0)
+				System.err.println("HEAT-MSG-SENDER Err : no agent found");
+			for (DFAgentDescription dfAgentDescription : result) {
+					_receivers.add(dfAgentDescription.getName());
 			}			
 		}
 		catch (FIPAException fe) {
@@ -74,7 +67,7 @@ public class HeatingMSGSender extends OneShotBehaviour {
 		for (AID agent : _receivers) {
 			msg.addReceiver(agent);
 		}
-        msg.setReplyByDate(new Date(System.currentTimeMillis() + 5000)); //Max reply in 5 secs
+        msg.setReplyByDate(new Date(System.currentTimeMillis() + 10000)); //Max reply in 5 secs
 		msg.setLanguage("English");
 		//msg.setOntology(ENetType.HEATING+"-REQUEST"); //No need use protocol instead
 		msg.setProtocol(FIPANames.InteractionProtocol.FIPA_REQUEST);

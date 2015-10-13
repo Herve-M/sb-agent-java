@@ -1,10 +1,17 @@
 package sb.behaviours.fsm;
 
 import jade.core.behaviours.OneShotBehaviour;
-import sb.jsonapi.JSEquipement;
 import sb.jsonapi.JSTemperature;
 import sb.jsonapi.MSJson;
 
+/**
+ * FSM State Behavior used to get temperature position.
+ * T > TMax : 1
+ * T U [TMin, TMax] : 0
+ * T < TMin : -1
+ * @author Hervé
+ *
+ */
 public class FSMTemperatureGetter extends OneShotBehaviour {
 	private JSTemperature _temperature;
 	

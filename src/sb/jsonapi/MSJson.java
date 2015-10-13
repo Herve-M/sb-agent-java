@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -93,7 +93,6 @@ public class MSJson {
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
-		InputStreamReader in = null;
 		try {
 			URL uri = new URL(url);
 			httpConnection = (HttpURLConnection) uri.openConnection();
@@ -122,7 +121,6 @@ public class MSJson {
 		url += value;
 		
 		HttpURLConnection httpConnection = null;
-		InputStreamReader in = null;
 		try {
 			URL uri = new URL(url);
 			httpConnection = (HttpURLConnection) uri.openConnection();

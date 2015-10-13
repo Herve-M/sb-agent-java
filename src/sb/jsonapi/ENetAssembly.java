@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -24,6 +24,11 @@ public enum ENetAssembly {
 	 */
 	ENetAssembly(String code){
 		this._code = code;
+	}
+	
+	@Override
+	public String toString() {
+		return _code;
 	}
 	
 	/** The _code. */

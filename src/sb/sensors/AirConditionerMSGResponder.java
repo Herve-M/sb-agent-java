@@ -43,10 +43,16 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 			protected ACLMessage handleRequest(ACLMessage request) throws NotUnderstoodException, RefuseException {
 				String msgContent = request.getContent();
 				_action = EAction.valueOf(msgContent);
+				
+				System.out.println("AirCondition action : "+_action);
 								
 				if(_airConditioner.getState() == false){
 					if(_action != EAction.ON) {
 						throw new RefuseException("Tried to action on halted equipment");
+					}
+				} else {
+					if(_action == EAction.ON) {
+						throw new RefuseException("Tried to start a started equipment");
 					}
 				}
 				

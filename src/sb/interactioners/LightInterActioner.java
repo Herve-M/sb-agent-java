@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -30,8 +30,7 @@ public class LightInterActioner implements IActioner, IInterActioner {
 	 * @param lightName the light name
 	 */
 	public LightInterActioner(String lightName) {
-		_name = lightName;	
-		updateData();
+		_name = lightName;
 	}
 
 	/* (non-Javadoc)

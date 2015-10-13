@@ -44,16 +44,22 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 			private HeatingInterActioner	_heating = new HeatingInterActioner(_defaultAgent.targetedObject);
 			private EAction					_action;
 			private int 					_oldValue;
-			private boolean 				_oldState;
+			private boolean 				_oldState = false;
 			
 			@Override
 			protected ACLMessage handleRequest(ACLMessage request) throws NotUnderstoodException, RefuseException {
 				String msgContent = request.getContent();
 				_action = EAction.valueOf(msgContent);
+				
+				System.out.println("Heating action : "+_action);
 								
 				if(_heating.getState() == false){
 					if(_action != EAction.ON) {
 						throw new RefuseException("Tried to action on halted equipment");
+					}
+				} else {
+					if(_action == EAction.ON) {
+						throw new RefuseException("Tried to start a started equipment");
 					}
 				}
 				
@@ -93,8 +99,9 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				
 				switch (_action) {
 				case ON:{
-					if(_oldState == _heating.getState())
+					if(_oldState == _heating.getState()){
 						throw new FailureException("Heater doesn't start !!");
+					}						
 					break;
 				}			
 				case OFF:{

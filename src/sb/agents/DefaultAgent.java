@@ -23,6 +23,7 @@ import sb.actioners.PresenceActioner;
 import sb.actioners.TemperatureActioner;
 import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.behaviours.EBehaviour;
+import sb.behaviours.TemperatureBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -118,6 +119,9 @@ public class DefaultAgent extends Agent {
 					break;
 				case AirConditionnerMSGResponder:
 					addBehaviour(new AirConditionerMSGResponder(this));
+					break;
+				case TemperatureBehaviour:
+					addBehaviour(new TemperatureBehaviour(this, Integer.valueOf(strAgrs[0])));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

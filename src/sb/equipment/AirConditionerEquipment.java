@@ -1,5 +1,5 @@
 /**
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update: 2015/10/09
  */
@@ -35,6 +35,7 @@ public class AirConditionerEquipment extends OneShotBehaviour{
 		DefaultAgent agent = (DefaultAgent) myAgent;
 		AirConditionerInterActioner hia = new AirConditionerInterActioner(agent.targetedObject);
 		hia.setValue(this.value);
+//		System.out.println("[JSON] Update AC to :"+this.value);
 	}
 
 }
