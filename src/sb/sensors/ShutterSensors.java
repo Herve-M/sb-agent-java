@@ -48,7 +48,7 @@ public class ShutterSensors extends TickerBehaviour {
 			if(_shutter.getValue() != _shutterState){
 				_shutterState = _shutter.getValue();
 				_defaultAgent.sendInform(ENetType.SHUTTER, String.valueOf(_shutterState));
-				System.out.println("ShutterSensors state changed");
+				System.out.println("[SENSORS] ShutterSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.SHUTTER);

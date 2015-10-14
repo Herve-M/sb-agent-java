@@ -49,7 +49,7 @@ public class HeatingSensors extends TickerBehaviour {
 			if(_heating.getValue() != _heatingState){
 				_heatingState = _heating.getValue();
 				_defaultAgent.sendInform(ENetType.HEATING, String.valueOf(_heatingState));
-				System.out.println("ShutterSensors state changed");
+				System.out.println("[SENSORS] HeatingSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.HEATING);

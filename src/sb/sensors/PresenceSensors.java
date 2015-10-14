@@ -48,7 +48,7 @@ public class PresenceSensors extends TickerBehaviour {
 			if(_presence.getValue() != _presenceState){
 				_presenceState = _presence.getValue();
 				_defaultAgent.sendInform(ENetType.PRESENCE, String.valueOf(_presenceState));
-				System.out.println("LuminositySensors state changed");
+				System.out.println("[SENSORS] PresenceSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.PRESENCE);
