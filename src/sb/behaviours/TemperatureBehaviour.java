@@ -62,10 +62,10 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerLastState(new EndFSMBehavior(), STEND); // 4
 		this.registerState(new FSMSMAStateGetter(roomId), ST1); // 1
 		
-		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST2); //GET
+		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST2); //GET
 		this.registerState(new UserMSGSender(myAgent, EUserAction.HTOFF, roomId), ST3); //SET
 		this.registerState(new UserMSGSender(myAgent, EUserAction.ACON, roomId), ST5); //SET
-		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST6); //GET
+		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST6); //GET
 		this.registerState(new FSMTemperatureGetter(roomId), ST7); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST9); //SET
@@ -77,10 +77,10 @@ public class TemperatureBehaviour extends FSMBehaviour {
 //		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)) , ST13);
 		
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST14);  //SET
-		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST15); //GET
+		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST15); //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST16); //SET
 		
-		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST17); //GET
+		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST17); //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST18); //SET
 		this.registerState(new FSMSMAStateGetter(roomId), ST19); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST20); //SET

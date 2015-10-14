@@ -135,10 +135,10 @@ public class Room001 implements ISetup {
 					);
 			
 			//TODO : verify name from database
-			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1),
-					"sb.agents.HeatingAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)}));
-			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1),
-					"sb.agents.AirConditionerAgent", new Object[]{"1", ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1),
+					"sb.agents.HeatingAgent", new Object[]{"1", ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)}));
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1),
+					"sb.agents.AirConditionerAgent", new Object[]{"1", ClassificationHelper.getClassificationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)}));
 			
 			//Master
 			agents.add(agentContainer.createNewAgent(
