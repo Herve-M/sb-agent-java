@@ -21,7 +21,6 @@ public class MainContainer implements ISetup {
 	 */
 	@Override
 	public void setArgs(String[] args) {
-		// TODO Auto-generated method stub
 		
 	}
 

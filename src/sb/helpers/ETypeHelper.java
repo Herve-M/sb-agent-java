@@ -38,7 +38,7 @@ public enum ETypeHelper {
 	/** The hlt. */
 	HLT("HLT"),
 	
-	/** The none. */
+	/** The Air Conditioner. */
 	AIRCONDITIONER("A"),
 	
 	/** The none. */

@@ -17,9 +17,9 @@ public class ClassificationHelper {
 	 * @param category the category
 	 * @param type the type
 	 * @param number the number
-	 * @return the classifcation code
+	 * @return the classification code
 	 */
-	public static String getClassifcationCode(ECategoryHelper category, ETypeHelper type, int number){
+	public static String getClassificationCode(ECategoryHelper category, ETypeHelper type, int number){
 		return new String(category+(type == ETypeHelper.NONE ? "" : "-"+type)+"-"+String.format("%03d", number));		
 	}
 	
