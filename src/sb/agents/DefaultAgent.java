@@ -1,7 +1,7 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Hervé
  * @version 1.0
- * Last Update : 2015/10/09
+ * Last Update : 2015/10/13
  */
 package sb.agents;
 
@@ -23,6 +23,7 @@ import sb.actioners.PresenceActioner;
 import sb.actioners.TemperatureActioner;
 import sb.behaviours.AgentDiscoveryBehaviour;
 import sb.behaviours.EBehaviour;
+import sb.behaviours.TemperatureBehaviour;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
@@ -32,6 +33,8 @@ import sb.interactioners.LightInterActioner;
 import sb.interactioners.ShutterInterActioner;
 import sb.jsonapi.ENetType;
 import sb.sensors.AirConditionerSensors;
+import sb.sensors.AirConditionerMSGResponder;
+import sb.sensors.HeatingMSGResponder;
 import sb.sensors.HeatingSensors;
 import sb.sensors.HumiditySensors;
 import sb.sensors.IOSensors;
@@ -82,12 +85,14 @@ public class DefaultAgent extends Agent {
 					break;
 				case ShutterSensors:
 					addBehaviour(new ShutterSensors(this, new ShutterInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case PresenceSensors:
 					addBehaviour(new PresenceSensors(this, new PresenceActioner(strAgrs[1])));
 					break;
 				case LightSensors:
 					addBehaviour(new LightSensors(this, new LightInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case IOSensors:
 					addBehaviour(new IOSensors(this, new IOActioner(strAgrs[1])));
@@ -103,9 +108,20 @@ public class DefaultAgent extends Agent {
 					break;
 				case HeatingSensors:
 					addBehaviour(new HeatingSensors(this, new HeatingInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
 					break;
 				case AirConditionerSensors:
 					addBehaviour(new AirConditionerSensors(this, new AirConditionerInterActioner(strAgrs[1])));
+					targetedObject = strAgrs[1];
+					break;
+				case HeatingMSGResponder:
+					addBehaviour(new HeatingMSGResponder(this));
+					break;
+				case AirConditionnerMSGResponder:
+					addBehaviour(new AirConditionerMSGResponder(this));
+					break;
+				case TemperatureBehaviour:
+					addBehaviour(new TemperatureBehaviour(this, Integer.valueOf(strAgrs[0])));
 					break;
 				default:
 					System.err.println("Trying to register a unknow Behaviour");

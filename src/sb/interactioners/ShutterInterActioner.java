@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -31,7 +31,6 @@ public class ShutterInterActioner implements IInterActioner, IActioner {
 	 */
 	public ShutterInterActioner(String shutterName) {
 		_name = shutterName;	
-		updateData();
 	}
 	
 	/* (non-Javadoc)

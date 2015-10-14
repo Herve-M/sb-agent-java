@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -21,7 +21,9 @@ public enum ECategoryHelper {
 	AGENT("AGT"),
 	
 	/** The container. */
-	CONTAINER("CTN");
+	CONTAINER("CTN"),
+	
+	USER("USER");
 	
 	/**
 	 * Instantiates a new e category helper.

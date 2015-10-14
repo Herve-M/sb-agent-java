@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -30,8 +30,7 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	 * @param heatingName the heating name
 	 */
 	public HeatingInterActioner(String heatingName) {
-		_name = heatingName;	
-		updateData();
+		_name = heatingName;
 	}
 	
 	/* (non-Javadoc)
@@ -82,8 +81,8 @@ public class HeatingInterActioner implements IActioner, IInterActioner {
 	private void updateData() {
 		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
-		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);
+		this._state = _value > 0 ? true : false;
 	}
 
 }

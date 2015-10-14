@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -47,7 +47,7 @@ public class LuminositySensors extends TickerBehaviour {
 			if(_luminosity.getValue() != _luminosityState){
 				_luminosityState = _luminosity.getValue();
 				_defaultAgent.sendInform(ENetType.LUMINOSITY, String.valueOf(_luminosityState));
-				System.out.println("LuminositySensors state changed");
+				System.out.println("[SENSORS] LuminositySensors state changed");
 			} 
 		} else {
 			_defaultAgent.sendFailure(ENetType.LUMINOSITY);

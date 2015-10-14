@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -48,7 +48,7 @@ public class LightSensors extends TickerBehaviour {
 			if(_light.getValue() != _lightState){
 				_lightState = _light.getValue();
 				_defaultAgent.sendInform(ENetType.LIGHT, String.valueOf(_lightState));
-				System.out.println("LightSensors state changed");
+				System.out.println("[SENSORS] LightSensors state changed");
 			} 
 		} else {
 			_defaultAgent.sendFailure(ENetType.LIGHT);

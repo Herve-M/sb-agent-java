@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -33,7 +33,7 @@ public class PresenceAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.PRESENCE);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.PresenceSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.PresenceSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

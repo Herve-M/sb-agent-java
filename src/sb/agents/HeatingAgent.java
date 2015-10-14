@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -31,9 +31,10 @@ public class HeatingAgent extends DefaultAgent {
 			}
 			
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.HEATING);
+			registerDescription(ECategoryHelper.ACTIONER, ETypeHelper.HEATING);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.HeatingSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.HeatingSensors, EBehaviour.AgentDiscovery, EBehaviour.HeatingMSGResponder);			
 			registerBehaviours(behaviours);
 		}
 		else {

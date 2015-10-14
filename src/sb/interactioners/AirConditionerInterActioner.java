@@ -1,5 +1,5 @@
 /**
- * @author MATYSIAK Hervé
+ * @author MATYSIAK HervÃ©
  */
 package sb.interactioners;
 
@@ -7,10 +7,6 @@ import sb.actioners.IActioner;
 import sb.jsonapi.JSEquipement;
 import sb.jsonapi.MSJson;
 
-/**
- * 
- *
- */
 public class AirConditionerInterActioner implements IActioner, IInterActioner {
 
 	/** The _name. */
@@ -27,7 +23,6 @@ public class AirConditionerInterActioner implements IActioner, IInterActioner {
 	 */
 	public AirConditionerInterActioner(String airConditionerName) {
 		_name = airConditionerName;
-		updateData();
 	}
 	
 	/* (non-Javadoc)
@@ -78,8 +73,8 @@ public class AirConditionerInterActioner implements IActioner, IInterActioner {
 	private void updateData() {
 		JSEquipement equipement = MSJson.getEquipment(_name);
 		//TODO see Type ?
-		this._state = equipement != null ? true : false;
 		this._value = Integer.parseInt(equipement.value);
+		this._state = _value > 0 ? true : false;
 	}
 
 }

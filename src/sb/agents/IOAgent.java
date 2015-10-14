@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -33,7 +33,7 @@ public class IOAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.IO);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.IOSensors);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.IOSensors, EBehaviour.AgentDiscovery);			
 			registerBehaviours(behaviours);
 		}
 		else {

@@ -1,21 +1,20 @@
-/*
- * @author MATYSIAK Herve
- * @version 1.0
- * Last Update : 2015/10/09
- */
 package sb.agents;
 
 import java.util.EnumSet;
 
 import sb.behaviours.EBehaviour;
+import sb.behaviours.manual.UserMSGResponder;
+import sb.behaviours.manual.UserMSGResponder;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
-
 /**
- * The Class LightAgent.
+ * A user agent. Used only when SMA run on MANUAL mod
+ * on client side !
+ * @author Hervé
+ *
  */
-public class LightAgent extends DefaultAgent {
+public class UserAgent extends DefaultAgent {
 
 	/* (non-Javadoc)
 	 * @see jade.core.Agent#setup()
@@ -29,15 +28,15 @@ public class LightAgent extends DefaultAgent {
 			for (int i = 0; i < args.length; i++) {
 				strAgrs [i] = (String) args[i];
 			}
-		
-			registerDescription(ECategoryHelper.SENSOR, ETypeHelper.LIGHT);
+			
+			registerDescription(ECategoryHelper.USER, ETypeHelper.NONE);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.LightSensors, EBehaviour.AgentDiscovery);			
-			registerBehaviours(behaviours);
+			addBehaviour(new UserMSGResponder(this));
 		}
 		else {
 			doDelete();
 		}
 	}
+
 }

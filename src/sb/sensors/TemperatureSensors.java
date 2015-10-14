@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -48,7 +48,7 @@ public class TemperatureSensors extends TickerBehaviour {
 			if(_temperature.getValue() != _temperatureState){
 				_temperatureState = _temperature.getValue();
 				_defaultAgent.sendInform(ENetType.TEMPERATURE, String.valueOf(_temperatureState));
-				System.out.println("ShutterSensors state changed");
+				System.out.println("[SENSORS] TemperatureSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.TEMPERATURE);

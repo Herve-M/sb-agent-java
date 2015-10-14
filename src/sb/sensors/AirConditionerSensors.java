@@ -1,5 +1,5 @@
 /**
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update: 2015/10/09
  */

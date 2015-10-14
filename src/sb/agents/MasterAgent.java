@@ -1,7 +1,7 @@
 /*
- * @author MATYSIAK Herv�
+ * @author MATYSIAK Hervé
  * @version 1.0
- * Last Update : 2015/10/09
+ * Last Update : 2015/10/13
  */
 package sb.agents;
 
@@ -33,7 +33,7 @@ public class MasterAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.NONE);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.AgentDiscovery);			
+			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.TemperatureBehaviour);			
 			registerBehaviours(behaviours);
 		}
 		else {
