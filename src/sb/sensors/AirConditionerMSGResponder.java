@@ -25,7 +25,6 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 	public AirConditionerMSGResponder(Agent a) {
 		super(a);
 		_defaultAgent = (DefaultAgent) myAgent;
-		System.out.println(_defaultAgent.targetedObject);
 		_template = MessageTemplate.and(
 		  		MessageTemplate.MatchProtocol(FIPANames.InteractionProtocol.FIPA_REQUEST),
 		  		MessageTemplate.MatchPerformative(ACLMessage.REQUEST) );
@@ -52,7 +51,7 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 					}
 				} else {
 					if(_action == EAction.ON) {
-						throw new RefuseException("Tried to start a started equipment");
+						throw new RefuseException("Tried to start a running equipment");
 					}
 				}
 				
@@ -69,12 +68,14 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 				}	
 				case P1:{
 					_oldValue = _airConditioner.getValue();
-					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue+1));
+					if(_oldValue < 5)
+						myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue+1));
 					break;
 				}
 				case M1:{
 					_oldValue = _airConditioner.getValue();
-					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
+					if(_oldValue >= 0)
+						myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
 					break;
 				}
 				default:
@@ -93,22 +94,22 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 				switch (_action) {
 				case ON:{
 					if(_oldState == _airConditioner.getState())
-						throw new FailureException("Heater doesn't start !!");
+						throw new FailureException("AirConditioner doesn't start !!");
 					break;
 				}			
 				case OFF:{
 					if(_oldState == _airConditioner.getState())
-						throw new FailureException("Heater doesn't stop !!");
+						throw new FailureException("AirConditioner doesn't stop !!");
 					break;
 				}	
 				case P1:{
 					if(_oldValue == _airConditioner.getValue())
-						throw new FailureException("Heater can't be increased !!");
+						throw new FailureException("AirConditioner can't be increased !!");
 					break;
 				}
 				case M1:{
 					if(_oldValue == _airConditioner.getValue())
-						throw new FailureException("Heater can't be decreased !!");
+						throw new FailureException("AirConditioner can't be decreased !!");
 					break;
 				}
 				default:

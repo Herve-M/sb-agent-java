@@ -76,12 +76,14 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				}	
 				case P1:{
 					_oldValue = _heating.getValue();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue+1));
+					if(_oldValue < 5)
+						myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue+1));
 					break;
 				}
 				case M1:{
 					_oldValue = _heating.getValue();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
+					if(_oldValue >= 0)
+						myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
 					break;
 				}
 				default:

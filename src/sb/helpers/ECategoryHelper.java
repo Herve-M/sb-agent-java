@@ -21,7 +21,9 @@ public enum ECategoryHelper {
 	AGENT("AGT"),
 	
 	/** The container. */
-	CONTAINER("CTN");
+	CONTAINER("CTN"),
+	
+	USER("USER");
 	
 	/**
 	 * Instantiates a new e category helper.

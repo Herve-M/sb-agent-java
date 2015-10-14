@@ -98,6 +98,10 @@ public class Room001 implements ISetup {
 			agents.add(agentContainer.createNewAgent(ClassificationHelper.getCategoryCode(ECategoryHelper.AGENT, ETypeHelper.NONE),
 					"sb.agents.MasterAgent", new Object[]{"1"}));
 			
+			//User
+			agents.add(agentContainer.createNewAgent(ClassificationHelper.getCategoryCode(ECategoryHelper.USER, ETypeHelper.NONE),
+					"sb.agents.UserAgent", new Object[]{"1"}));
+			
 			agentContainer.start();
 			
 			for (AgentController agentController : agents) {

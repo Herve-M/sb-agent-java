@@ -67,7 +67,7 @@ public class HeatingMSGSender extends OneShotBehaviour {
 		for (AID agent : _receivers) {
 			msg.addReceiver(agent);
 		}
-        msg.setReplyByDate(new Date(System.currentTimeMillis() + 10000)); //Max reply in 5 secs
+        msg.setReplyByDate(new Date(System.currentTimeMillis() + 15000)); //Max reply in 10 secs
 		msg.setLanguage("English");
 		//msg.setOntology(ENetType.HEATING+"-REQUEST"); //No need use protocol instead
 		msg.setProtocol(FIPANames.InteractionProtocol.FIPA_REQUEST);
@@ -87,7 +87,7 @@ public class HeatingMSGSender extends OneShotBehaviour {
 			
 			@Override
 			protected void handleRefuse(ACLMessage refuse) {
-				System.err.println("Error REQUEST was rerfused by "+refuse.getSender().getName());
+				System.err.println("Error REQUEST was rerfused by "+refuse.getSender().getName()+" : "+refuse.getContent());
 			}
 			
 			@Override

@@ -48,7 +48,7 @@ public class HumiditySensors extends TickerBehaviour {
 			if(_humidity.getValue() != _humidityState){
 				_humidityState = _humidity.getValue();
 				_defaultAgent.sendInform(ENetType.HUMIDITY, String.valueOf(_humidityState));
-				System.out.println("ShutterSensors state changed");
+				System.out.println("[SENSORS] HumiditySensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.HUMIDITY);

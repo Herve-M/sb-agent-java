@@ -8,10 +8,12 @@ import sb.behaviours.fsm.FSMHeatingGetter;
 import sb.behaviours.fsm.FSMSMAStateGetter;
 import sb.behaviours.fsm.FSMTemperatureGetter;
 import sb.behaviours.fsm.NullBehaviour;
+import sb.behaviours.manual.UserMSGSender;
 import sb.helpers.ClassificationHelper;
 import sb.helpers.EAction;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
+import sb.helpers.EUserAction;
 import sb.sensors.AirConditionerMSGSender;
 import sb.sensors.HeatingMSGSender;
 
@@ -61,17 +63,19 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new FSMSMAStateGetter(roomId), ST1); // 1
 		
 		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST2); //GET
-		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST3); //SET
-		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST5); //SET
+		this.registerState(new UserMSGSender(myAgent, EUserAction.HTOFF, roomId), ST3); //SET
+		this.registerState(new UserMSGSender(myAgent, EUserAction.ACON, roomId), ST5); //SET
 		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST6); //GET
 		this.registerState(new FSMTemperatureGetter(roomId), ST7); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST9); //SET
 		this.registerState(new FSMTemperatureGetter(roomId), ST10);  //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST11); //SET
-		this.registerState(new NullBehaviour() , ST12); //TO test
+		this.registerState(new NullBehaviour() , ST12);
 		
-		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)) , ST13);
+		this.registerState(new NullBehaviour() , ST13); //Only Exia Scenario
+//		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)) , ST13);
+		
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST14);  //SET
 		this.registerState(new FSMAirConditionerGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.AIRCONDITIONER, 1)), ST15); //GET
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST16); //SET
@@ -80,13 +84,13 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST18); //SET
 		this.registerState(new FSMSMAStateGetter(roomId), ST19); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST20); //SET
-		this.registerState(new HeatingMSGSender(myAgent, EAction.ON, roomId), ST21); //SET
+		this.registerState(new UserMSGSender(myAgent, EUserAction.HTON, roomId), ST21); //SET
 		
 		{ //T>max
 			//TEMP
 			this.registerTransition(STBEGIN, ST1, 1);
 			this.registerTransition(STBEGIN, ST13, 0);
-			this.registerTransition(STBEGIN, ST18, -1);
+			this.registerTransition(STBEGIN, ST17, -1);
 			
 			//MOD
 			this.registerTransition(ST1, ST2, 0); //Manual
@@ -121,13 +125,17 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		} // End Tmax
 		
 		{ // T[]
-			this.registerTransition(ST13, ST14,1);
-			this.registerTransition(ST13, ST15,0);
-			this.registerDefaultTransition(ST14, ST15);
 			
-			this.registerTransition(ST15, ST16, 1);
-			this.registerTransition(ST15, STEND, 0);
-			this.registerDefaultTransition(ST16, STEND);
+			this.registerDefaultTransition(ST13, STEND);
+			
+			//Only our SMA, not Exia Scenario
+//			this.registerTransition(ST13, ST14,1);
+//			this.registerTransition(ST13, ST15,0);
+//			this.registerDefaultTransition(ST14, ST15);
+//			
+//			this.registerTransition(ST15, ST16, 1);
+//			this.registerTransition(ST15, STEND, 0);
+//			this.registerDefaultTransition(ST16, STEND);
 		} // End T[]
 		
 		{ // T<min
