@@ -25,6 +25,7 @@ public class SBMainSetup {
 	 */
 	public SBMainSetup(){
 		_setups.add(new MainContainer());
+		_setups.add(new UserAgentSetup());
 		_setups.add(new Room001());
 	}
 	

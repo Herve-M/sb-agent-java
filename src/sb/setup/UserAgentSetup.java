@@ -5,6 +5,9 @@ package sb.setup;
 
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
+
+import java.util.Scanner;
+
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -35,6 +38,7 @@ public class UserAgentSetup implements ISetup {
 			
 			ProfileImpl p = new ProfileImpl(false);
 			p.setParameter(Profile.CONTAINER_NAME, "CTN-USERAGENT");
+			p.setParameter(Profile.DETECT_MAIN, "true");
 			
 			AgentContainer container = runtime.createAgentContainer(p);
 			
@@ -57,8 +61,7 @@ public class UserAgentSetup implements ISetup {
 	 */
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String("Deploy a User Agent on a CTN-USERAGENT Container");
 	}
 
 	/* (non-Javadoc)
@@ -66,8 +69,7 @@ public class UserAgentSetup implements ISetup {
 	 */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getName();
 	}
 
 }
