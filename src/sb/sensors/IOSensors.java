@@ -1,5 +1,5 @@
 /*
- * @author MATYSIAK Hervé
+ * @author MATYSIAK Herve
  * @version 1.0
  * Last Update : 2015/10/09
  */
@@ -48,7 +48,7 @@ public class IOSensors extends TickerBehaviour{
 			if (_ioActioner.getValue() != _ioState) {
 				_ioState = _ioActioner.getValue();
 				_defaultAgent.sendInform(ENetType.IO, String.valueOf(_ioState));
-				System.out.println("ShutterSensors state changed");
+				System.out.println("[SENSORS] IOSensors state changed");
 			}
 		} else {
 			_defaultAgent.sendFailure(ENetType.IO);
