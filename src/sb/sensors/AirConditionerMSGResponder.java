@@ -47,7 +47,8 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 								
 				if(_airConditioner.getState() == false){
 					if(_action != EAction.ON) {
-						throw new RefuseException("Tried to action on halted equipment");
+						myAgent.addBehaviour(new AirConditionerEquipment(myAgent, 1));
+						//throw new RefuseException("Tried to action on halted equipment");
 					}
 				} else {
 					if(_action == EAction.ON) {
@@ -58,7 +59,7 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 				switch (_action) {
 				case ON:{
 					_oldState = _airConditioner.getState();
-					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, 1));
+					myAgent.addBehaviour(new AirConditionerEquipment(myAgent, 2));
 					break;
 				}			
 				case OFF:{
@@ -74,7 +75,7 @@ public class AirConditionerMSGResponder extends OneShotBehaviour {
 				}
 				case M1:{
 					_oldValue = _airConditioner.getValue();
-					if(_oldValue >= 0)
+					if(_oldValue >= 1)
 						myAgent.addBehaviour(new AirConditionerEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
 					break;
 				}

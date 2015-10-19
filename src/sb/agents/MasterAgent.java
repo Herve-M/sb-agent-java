@@ -7,7 +7,9 @@ package sb.agents;
 
 import java.util.EnumSet;
 
+import jade.core.behaviours.TickerBehaviour;
 import sb.behaviours.EBehaviour;
+import sb.behaviours.TemperatureBehaviour;
 import sb.helpers.ECategoryHelper;
 import sb.helpers.ETypeHelper;
 
@@ -33,8 +35,17 @@ public class MasterAgent extends DefaultAgent {
 			registerDescription(ECategoryHelper.AGENT, ETypeHelper.NONE);
 			registerAgent();
 			
-			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.TemperatureBehaviour);			
-			registerBehaviours(behaviours);
+//			EnumSet<EBehaviour> behaviours = EnumSet.of(EBehaviour.TemperatureBehaviour);			
+//			registerBehaviours(behaviours);
+			
+			addBehaviour(new TickerBehaviour(this, 1300) {
+				
+				@Override
+				protected void onTick() {
+					myAgent.addBehaviour(new TemperatureBehaviour(myAgent, 1));				
+				}
+			});
+			
 		}
 		else {
 			doDelete();

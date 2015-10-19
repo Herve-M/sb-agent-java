@@ -3,6 +3,7 @@ package sb.behaviours;
 import jade.core.Agent;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 import sb.behaviours.fsm.FSMAirConditionerGetter;
 import sb.behaviours.fsm.FSMHeatingGetter;
 import sb.behaviours.fsm.FSMSMAStateGetter;
@@ -63,15 +64,17 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new FSMSMAStateGetter(roomId), ST1); // 1
 		
 		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST2); //GET
-		this.registerState(new UserMSGSender(myAgent, EUserAction.HTOFF, roomId), ST3); //SET
-		this.registerState(new UserMSGSender(myAgent, EUserAction.ACON, roomId), ST5); //SET
+//		this.registerState(new UserMSGSender(myAgent, EUserAction.HTOFF, roomId), ST3); //SET
+//		this.registerState(new UserMSGSender(myAgent, EUserAction.ACON, roomId), ST5); //SET
+		this.registerState(new NullBehaviour(), ST3); //SET
+		this.registerState(new NullBehaviour(), ST5); //SET
 		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)), ST6); //GET
 		this.registerState(new FSMTemperatureGetter(roomId), ST7); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.M1, roomId), ST8); //SET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.OFF, roomId), ST9); //SET
 		this.registerState(new FSMTemperatureGetter(roomId), ST10);  //GET
-		this.registerState(new AirConditionerMSGSender(myAgent, EAction.ON, roomId), ST11); //SET
-		this.registerState(new NullBehaviour() , ST12);
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.P1, roomId), ST11); //SET
+		this.registerState(new AirConditionerMSGSender(myAgent, EAction.M1, roomId), ST12);
 		
 		this.registerState(new NullBehaviour() , ST13); //Only Exia Scenario
 //		this.registerState(new FSMHeatingGetter(ClassificationHelper.getClassifcationCode(ECategoryHelper.ACTIONER, ETypeHelper.HEATING, 1)) , ST13);
@@ -84,7 +87,8 @@ public class TemperatureBehaviour extends FSMBehaviour {
 		this.registerState(new AirConditionerMSGSender(myAgent, EAction.OFF, roomId), ST18); //SET
 		this.registerState(new FSMSMAStateGetter(roomId), ST19); //GET
 		this.registerState(new HeatingMSGSender(myAgent, EAction.P1, roomId), ST20); //SET
-		this.registerState(new UserMSGSender(myAgent, EUserAction.HTON, roomId), ST21); //SET
+		this.registerState(new NullBehaviour(), ST21); //SET
+//		this.registerState(new UserMSGSender(myAgent, EUserAction.HTOFF, roomId), ST21); //SET
 		
 		{ //T>max
 			//TEMP
@@ -113,8 +117,10 @@ public class TemperatureBehaviour extends FSMBehaviour {
 				//TEMP
 				this.registerTransition(ST7, ST8, 1);
 				this.registerTransition(ST7, ST9, 0);
+				this.registerTransition(ST7, STEND, -1);
 				this.registerTransition(ST10, ST11, 1);
 				this.registerTransition(ST10, ST12, 0);
+				this.registerTransition(ST10, STEND, -1);
 				
 				//End
 				this.registerDefaultTransition(ST8, STEND);
@@ -129,13 +135,13 @@ public class TemperatureBehaviour extends FSMBehaviour {
 			this.registerDefaultTransition(ST13, STEND);
 			
 			//Only our SMA, not Exia Scenario
-//			this.registerTransition(ST13, ST14,1);
-//			this.registerTransition(ST13, ST15,0);
-//			this.registerDefaultTransition(ST14, ST15);
-//			
-//			this.registerTransition(ST15, ST16, 1);
-//			this.registerTransition(ST15, STEND, 0);
-//			this.registerDefaultTransition(ST16, STEND);
+			this.registerTransition(ST13, ST14,1);
+			this.registerTransition(ST13, ST15,0);
+			this.registerDefaultTransition(ST14, ST15);
+			
+			this.registerTransition(ST15, ST16, 1);
+			this.registerTransition(ST15, STEND, 0);
+			this.registerDefaultTransition(ST16, STEND);
 		} // End T[]
 		
 		{ // T<min
@@ -157,7 +163,15 @@ public class TemperatureBehaviour extends FSMBehaviour {
 	
 	@Override
 	public int onEnd() {
-		myAgent.addBehaviour(new TemperatureBehaviour(myAgent, 1));
+		reset();
+//		myAgent.addBehaviour(new TickerBehaviour(myAgent, 2000) {
+//			
+//			@Override
+//			protected void onTick() {
+//				myAgent.addBehaviour(new TemperatureBehaviour(myAgent, 1));				
+//			}
+//		});
+		
 		return 1;
 	}
 }

@@ -110,8 +110,19 @@ public class UserMSGSender extends OneShotBehaviour {
 			protected void handleNotUnderstood(ACLMessage notUnderstood) {
 				System.err.println("Error REQUEST was not understood by agent "+notUnderstood.getSender().getName());
 			}
+			
+			@Override
+			public int onEnd() {
+				reset();
+				return super.onEnd();
+			}
 		});
 	}
 	
+	@Override
+	public int onEnd() {
+		reset();
+		return super.onEnd();
+	}
 	
 }

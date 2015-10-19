@@ -55,7 +55,8 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 								
 				if(_heating.getState() == false){
 					if(_action != EAction.ON) {
-						throw new RefuseException("Tried to action on halted equipment");
+						myAgent.addBehaviour(new HeatingEquipment(myAgent, 1));
+						//throw new RefuseException("Tried to action on halted equipment");
 					}
 				} else {
 					if(_action == EAction.ON) {
@@ -66,7 +67,7 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				switch (_action) {
 				case ON:{
 					_oldState = _heating.getState();
-					myAgent.addBehaviour(new HeatingEquipment(myAgent, 1));
+					myAgent.addBehaviour(new HeatingEquipment(myAgent, 2));
 					break;
 				}			
 				case OFF:{
@@ -82,7 +83,7 @@ public class HeatingMSGResponder extends OneShotBehaviour { //OneShot register t
 				}
 				case M1:{
 					_oldValue = _heating.getValue();
-					if(_oldValue >= 0)
+					if(_oldValue >= 1)
 						myAgent.addBehaviour(new HeatingEquipment(myAgent, _oldValue-1)); //TODO : x < 0 ?
 					break;
 				}
